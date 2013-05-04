@@ -1,0 +1,7 @@
+Class A was modified manualy by JBE tool, 
+1- add interface IA to A
+2- replace invokvirtual A/foo(Ljava/lang/String;)I  in main method code by 
+   invokeinterface IA/foo(Ljava/lang/String;)I 2
+3- run it !
+
+(note contant 37 InterfaceMethodref is insered automaticaly in the constantpool)

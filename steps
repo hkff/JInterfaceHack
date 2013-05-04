@@ -1,0 +1,4 @@
+cd InterfaceHack/bin/
+java hack/Patcher
+javap -c -v -p hack/A.class
+
