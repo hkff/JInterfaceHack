@@ -68,9 +68,19 @@ import  java.io.*;
  * @see     Constants
  */
 public final class StackMapType implements Cloneable {
-  private byte         type;
-  private int          index = -1; // Index to CONSTANT_Class or offset
-  private ConstantPool constant_pool;
+  /**
+ * @uml.property  name="type"
+ */
+private byte         type;
+  /**
+ * @uml.property  name="index"
+ */
+private int          index = -1; // Index to CONSTANT_Class or offset
+  /**
+ * @uml.property  name="constant_pool"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private ConstantPool constant_pool;
 
   /**
    * Construct object from file stream.
@@ -97,18 +107,31 @@ public final class StackMapType implements Cloneable {
     setConstantPool(constant_pool);
   }
 
-  public void setType(byte t) {
+  /**
+ * @param t
+ * @uml.property  name="type"
+ */
+public void setType(byte t) {
     if((t < Constants.ITEM_Bogus) || (t > Constants.ITEM_NewObject))
       throw new RuntimeException("Illegal type for StackMapType: " + t);
     type = t;
   }
 
-  public byte getType()       { return type; }
-  public void setIndex(int t) { index = t; }
+  /**
+ * @return
+ * @uml.property  name="type"
+ */
+public byte getType()       { return type; }
+  /**
+ * @param t
+ * @uml.property  name="index"
+ */
+public void setIndex(int t) { index = t; }
 
-  /** @return index to constant pool if type == ITEM_Object, or offset
-   * in byte code, if type == ITEM_NewObject, and -1 otherwise
-   */
+  /**
+ * @return  index to constant pool if type == ITEM_Object, or offset  in byte code, if type == ITEM_NewObject, and -1 otherwise
+ * @uml.property  name="index"
+ */
   public int  getIndex()      { return index; }
   
   /**

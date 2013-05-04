@@ -65,9 +65,20 @@ import java.util.Stack;
  * @author <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A> 
  */
 public class DescendingVisitor implements Visitor {
-  private JavaClass clazz;
-  private Visitor   visitor;
-  private Stack<Object>    stack = new Stack<Object>();
+  /**
+ * @uml.property  name="clazz"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private JavaClass clazz;
+  /**
+ * @uml.property  name="visitor"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private Visitor   visitor;
+  /**
+ * @uml.property  name="stack"
+ */
+private Stack<Object>    stack = new Stack<Object>();
 
   /** @return container of current entitity, i.e., predecessor during traversal
    */

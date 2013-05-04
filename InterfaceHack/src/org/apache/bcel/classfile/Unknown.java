@@ -79,8 +79,15 @@ public final class Unknown extends Attribute {
 	 * 
 	 */
 	private static final long serialVersionUID = 5223116203360488437L;
+/**
+ * @uml.property  name="bytes"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
 private byte[] bytes;
-  private String name;
+  /**
+ * @uml.property  name="name"
+ */
+private String name;
 
   private static HashMap<String, Unknown> unknown_attributes = new HashMap<String, Unknown>();
 
@@ -167,18 +174,21 @@ private byte[] bytes;
       file.write(bytes, 0, length);
   }    
   /**
-   * @return data bytes.
-   */  
+ * @return  data bytes.
+ * @uml.property  name="bytes"
+ */  
   public final byte[] getBytes() { return bytes; }    
 
   /**
-   * @return name of attribute.
-   */  
+ * @return  name of attribute.
+ * @uml.property  name="name"
+ */  
   public final String getName() { return name; }    
 
   /**
-   * @param bytes.
-   */
+ * @param  bytes.
+ * @uml.property  name="bytes"
+ */
   public final void setBytes(byte[] bytes) {
     this.bytes = bytes;
   }

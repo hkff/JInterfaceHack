@@ -70,6 +70,9 @@ public class NEWARRAY extends Instruction
 	 * 
 	 */
 	private static final long serialVersionUID = 7048445841018649405L;
+/**
+ * @uml.property  name="type"
+ */
 private byte type;
 
   /**

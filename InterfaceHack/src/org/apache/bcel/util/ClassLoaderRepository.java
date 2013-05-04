@@ -81,8 +81,15 @@ public class ClassLoaderRepository
 	 * 
 	 */
 	private static final long serialVersionUID = -6474458142333171889L;
+/**
+ * @uml.property  name="loader"
+ */
 private java.lang.ClassLoader loader;
-  private HashMap<String, JavaClass> loadedClasses =
+  /**
+ * @uml.property  name="loadedClasses"
+ * @uml.associationEnd  qualifier="getClassName:java.lang.String org.apache.bcel.classfile.JavaClass"
+ */
+private HashMap<String, JavaClass> loadedClasses =
     new HashMap<String, JavaClass>(); // CLASSNAME X JAVACLASS
 
   public ClassLoaderRepository( java.lang.ClassLoader loader ) {

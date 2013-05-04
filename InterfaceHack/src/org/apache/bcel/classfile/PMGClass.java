@@ -71,7 +71,14 @@ public final class PMGClass extends Attribute {
 	 * 
 	 */
 	private static final long serialVersionUID = 6583838571185484021L;
-private int pmg_class_index, pmg_index;
+/**
+ * @uml.property  name="pmg_class_index"
+ */
+private int pmg_class_index;
+/**
+ * @uml.property  name="pmg_index"
+ */
+private int pmg_index;
 
   /**
    * Initialize from another object. Note that both objects use the same

@@ -80,14 +80,17 @@ import java.util.HashSet;
 public final class Pass2Verifier extends PassVerifier implements Constants{
 
 	/**
-	 * The LocalVariableInfo instances used by Pass3bVerifier.
-	 * localVariablesInfos[i] denotes the information for the
-	 * local variables of method number i in the
-	 * JavaClass this verifier operates on.
+	 * The LocalVariableInfo instances used by Pass3bVerifier. localVariablesInfos[i] denotes the information for the local variables of method number i in the JavaClass this verifier operates on.
+	 * @uml.property  name="localVariablesInfos"
+	 * @uml.associationEnd  multiplicity="(0 -1)"
 	 */
 	private LocalVariablesInfo[] localVariablesInfos;
 	
-	/** The Verifier that created this. */
+	/**
+	 * The Verifier that created this.
+	 * @uml.property  name="myOwner"
+	 * @uml.associationEnd  multiplicity="(1 1)" inverse="p2v:org.apache.bcel.verifier.Verifier"
+	 */
 	private Verifier myOwner;
 
 	/**
@@ -268,11 +271,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 	}
 
 	/**
-	 * A Visitor class that ensures the constant pool satisfies the static
-	 * constraints.
-   * The visitXXX() methods throw ClassConstraintException instances otherwise.
-   *
-   * @see #constant_pool_entries_satisfy_static_constraints()
+	 * A Visitor class that ensures the constant pool satisfies the static constraints. The visitXXX() methods throw ClassConstraintException instances otherwise.
+	 * @see  #constant_pool_entries_satisfy_static_constraints()
 	 */
 	private class CPESSC_Visitor extends org.apache.bcel.classfile.EmptyVisitor implements Visitor{
 		private Class CONST_Class;
@@ -289,9 +289,21 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 		private Class CONST_NameAndType;
 		private Class CONST_Utf8;
 
+		/**
+		 * @uml.property  name="jc"
+		 * @uml.associationEnd  
+		 */
 		private final JavaClass jc;
+		/**
+		 * @uml.property  name="cp"
+		 * @uml.associationEnd  
+		 */
 		private final ConstantPool cp; // ==jc.getConstantPool() -- only here to save typing work and computing power.
 		private final int cplen; // == cp.getLength() -- to save computing power.
+		/**
+		 * @uml.property  name="carrier"
+		 * @uml.associationEnd  
+		 */
 		private DescendingVisitor carrier;
 
 		private HashSet<String> field_names = new HashSet<String>();
@@ -1079,15 +1091,15 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 	}
 
 	/**
-	 * A Visitor class that ensures the ConstantCP-subclassed entries
-	 * of the constant pool are valid.
-   * <B>Precondition: index-style cross referencing in the constant
-   * pool must be valid.</B>
-	 *
-   * @see #constant_pool_entries_satisfy_static_constraints()
-	 * @see org.apache.bcel.classfile.ConstantCP
+	 * A Visitor class that ensures the ConstantCP-subclassed entries of the constant pool are valid. <B>Precondition: index-style cross referencing in the constant pool must be valid.</B>
+	 * @see #constant_pool_entries_satisfy_static_constraints()
+	 * @see  org.apache.bcel.classfile.ConstantCP
 	 */
 	private class FAMRAV_Visitor extends EmptyVisitor implements Visitor{
+		/**
+		 * @uml.property  name="cp"
+		 * @uml.associationEnd  
+		 */
 		private final ConstantPool cp; // ==jc.getConstantPool() -- only here to save typing work.
 		private FAMRAV_Visitor(JavaClass _jc){
 			cp = _jc.getConstantPool();
@@ -1232,7 +1244,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 	 * This method returns true if and only if the supplied String
 	 * represents a valid Java programming language method name stored as a simple
 	 * (non-qualified) name.
-	 * Conforming to: The Java Virtual Machine Specification, Second Edition, §2.7, §2.7.1, §2.2.
+	 * Conforming to: The Java Virtual Machine Specification, Second Edition, ï¿½2.7, ï¿½2.7.1, ï¿½2.2.
 	 */
 	private static boolean validJavaLangMethodName(String name){
 		if (!Character.isJavaIdentifierStart(name.charAt(0))) return false;
@@ -1278,27 +1290,19 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 	}
 
 	/**
-	 * This class serves for finding out if a given JavaClass' ConstantPool
-	 * references an Inner Class.
-	 * The Java Virtual Machine Specification, Second Edition is not very precise
-	 * about when an "InnerClasses" attribute has to appear. However, it states that
-	 * there has to be exactly one InnerClasses attribute in the ClassFile structure
-	 * if the constant pool of a class or interface refers to any class or interface
-	 * "that is not a member of a package". Sun does not mean "member of the default
-	 * package". In "Inner Classes Specification" they point out how a "bytecode name"
-	 * is derived so one has to deduce what a class name of a class "that is not a
-	 * member of a package" looks like: there is at least one character in the byte-
-	 * code name that cannot be part of a legal Java Language Class name (and not equal
-	 * to '/'). This assumption is wrong as the delimiter is '$' for which
-	 * Character.isJavaIdentifierPart() == true.
-	 * Hence, you really run into trouble if you have a toplevel class called
-	 * "A$XXX" and another toplevel class called "A" with in inner class called "XXX".
-	 * JustIce cannot repair this; please note that existing verifiers at this
-	 * time even fail to detect missing InnerClasses attributes in pass 2.
+	 * This class serves for finding out if a given JavaClass' ConstantPool references an Inner Class. The Java Virtual Machine Specification, Second Edition is not very precise about when an "InnerClasses" attribute has to appear. However, it states that there has to be exactly one InnerClasses attribute in the ClassFile structure if the constant pool of a class or interface refers to any class or interface "that is not a member of a package". Sun does not mean "member of the default package". In "Inner Classes Specification" they point out how a "bytecode name" is derived so one has to deduce what a class name of a class "that is not a member of a package" looks like: there is at least one character in the byte- code name that cannot be part of a legal Java Language Class name (and not equal to '/'). This assumption is wrong as the delimiter is '$' for which Character.isJavaIdentifierPart() == true. Hence, you really run into trouble if you have a toplevel class called "A$XXX" and another toplevel class called "A" with in inner class called "XXX". JustIce cannot repair this; please note that existing verifiers at this time even fail to detect missing InnerClasses attributes in pass 2.
 	 */
 	private class InnerClassDetector extends EmptyVisitor{
 		private boolean hasInnerClass = false;
+		/**
+		 * @uml.property  name="jc"
+		 * @uml.associationEnd  
+		 */
 		private JavaClass jc;
+		/**
+		 * @uml.property  name="cp"
+		 * @uml.associationEnd  
+		 */
 		private ConstantPool cp;
 		private InnerClassDetector(){} // Don't use.
 		/** Constructs an InnerClassDetector working on the JavaClass _jc. */

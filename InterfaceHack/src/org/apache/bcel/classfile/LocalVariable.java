@@ -72,15 +72,34 @@ public final class LocalVariable
 	 * 
 	 */
 	private static final long serialVersionUID = 3930396866931886457L;
+/**
+ * @uml.property  name="start_pc"
+ */
 private int start_pc;        // Range in which the variable is valid
-  private int length;
-  private int name_index;      // Index in constant pool of variable name
-  private int signature_index; // Index of variable signature
-  private int index;            /* Variable is `index'th local variable on
+  /**
+ * @uml.property  name="length"
+ */
+private int length;
+  /**
+ * @uml.property  name="name_index"
+ */
+private int name_index;      // Index in constant pool of variable name
+  /**
+ * @uml.property  name="signature_index"
+ */
+private int signature_index; // Index of variable signature
+  /**
+ * @uml.property  name="index"
+ */
+private int index;            /* Variable is `index'th local variable on
 				* this method's frame.
 				*/
 
-  private ConstantPool constant_pool;
+  /**
+ * @uml.property  name="constant_pool"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private ConstantPool constant_pool;
 
   /**
    * Initialize from another object. Note that both objects use the same
@@ -156,8 +175,9 @@ private int start_pc;        // Range in which the variable is valid
   public final ConstantPool getConstantPool() { return constant_pool; }
 
   /**
-   * @return Variable is valid within getStartPC() .. getStartPC()+getLength()
-   */  
+ * @return  Variable is valid within getStartPC() .. getStartPC()+getLength()
+ * @uml.property  name="length"
+ */  
   public final int getLength()         { return length; }
 
   /**
@@ -191,8 +211,9 @@ private int start_pc;        // Range in which the variable is valid
   public final int getSignatureIndex() { return signature_index; }    
 
   /**
-   * @return index of register where variable is stored
-   */   
+ * @return  index of register where variable is stored
+ * @uml.property  name="index"
+ */   
   public final int getIndex()           { return index; }
 
   /**
@@ -208,8 +229,9 @@ private int start_pc;        // Range in which the variable is valid
   }
 
   /**
-   * @param length.
-   */
+ * @param  length.
+ * @uml.property  name="length"
+ */
   public final void setLength(int length) {
     this.length = length;
   }
@@ -229,8 +251,9 @@ private int start_pc;        // Range in which the variable is valid
   }    
 
   /**
-   * @param index.
-   */
+ * @param  index.
+ * @uml.property  name="index"
+ */
   public final void setIndex(int index) { this.index = index; }
 
   /**

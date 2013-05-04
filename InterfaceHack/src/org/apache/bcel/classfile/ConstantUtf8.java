@@ -71,6 +71,9 @@ public final class ConstantUtf8 extends Constant {
 	 * 
 	 */
 	private static final long serialVersionUID = -5990248333712937078L;
+/**
+ * @uml.property  name="bytes"
+ */
 private String bytes;
   
   /**
@@ -130,13 +133,15 @@ private String bytes;
   }
 
   /**
-   * @return Data converted to string.
-   */  
+ * @return  Data converted to string.
+ * @uml.property  name="bytes"
+ */  
   public final String getBytes() { return bytes; }    
 
   /**
-   * @param bytes.
-   */
+ * @param  bytes.
+ * @uml.property  name="bytes"
+ */
   public final void setBytes(String bytes) {
     this.bytes = bytes;
   }    

@@ -71,6 +71,10 @@ public final class BranchHandle extends InstructionHandle {
 	 * 
 	 */
 	private static final long serialVersionUID = -2520878285698255956L;
+/**
+ * @uml.property  name="bi"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
 private BranchInstruction bi; // An alias in fact, but saves lots of casts
 
   private BranchHandle(BranchInstruction i) {

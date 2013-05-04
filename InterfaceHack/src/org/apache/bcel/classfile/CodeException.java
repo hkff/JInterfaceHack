@@ -73,12 +73,24 @@ public final class CodeException
 	 * 
 	 */
 	private static final long serialVersionUID = 2626252725772175374L;
+/**
+ * @uml.property  name="start_pc"
+ */
 private int start_pc;   // Range in the code the exception handler is
-  private int end_pc;     // active. start_pc is inclusive, end_pc exclusive
-  private int handler_pc; /* Starting address of exception handler, i.e.,
+  /**
+ * @uml.property  name="end_pc"
+ */
+private int end_pc;     // active. start_pc is inclusive, end_pc exclusive
+  /**
+ * @uml.property  name="handler_pc"
+ */
+private int handler_pc; /* Starting address of exception handler, i.e.,
 			   * an offset from start of code.
 			   */
-  private int catch_type; /* If this is zero the handler catches any
+  /**
+ * @uml.property  name="catch_type"
+ */
+private int catch_type; /* If this is zero the handler catches any
 			   * exception, otherwise it points to the
 			   * exception class which is to be caught.
 			   */

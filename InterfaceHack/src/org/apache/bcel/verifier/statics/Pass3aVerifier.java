@@ -73,19 +73,30 @@ import org.apache.bcel.verifier.exc.*;
  */
 public final class Pass3aVerifier extends PassVerifier{
 
-	/** The Verifier that created this. */
+	/**
+	 * The Verifier that created this.
+	 * @uml.property  name="myOwner"
+	 * @uml.associationEnd  multiplicity="(1 1)"
+	 */
 	private Verifier myOwner;
 
-	/** 
-	 * The method number to verify.
-	 * This is the index in the array returned
-	 * by JavaClass.getMethods().
+	/**
+	 * The method number to verify. This is the index in the array returned by JavaClass.getMethods().
+	 * @uml.property  name="method_no"
 	 */
 	private int method_no;
 
-	/** The one and only InstructionList object used by an instance of this class. It's here for performance reasons by do_verify() and its callees. */	
+	/**
+	 * The one and only InstructionList object used by an instance of this class. It's here for performance reasons by do_verify() and its callees.
+	 * @uml.property  name="instructionList"
+	 * @uml.associationEnd  
+	 */	
 	InstructionList instructionList;
-	/** The one and only Code object used by an instance of this class. It's here for performance reasons by do_verify() and its callees. */	
+	/**
+	 * The one and only Code object used by an instance of this class. It's here for performance reasons by do_verify() and its callees.
+	 * @uml.property  name="code"
+	 * @uml.associationEnd  
+	 */	
 	Code code;
 
 	/** Should only be instantiated by a Verifier. */
@@ -382,11 +393,14 @@ public final class Pass3aVerifier extends PassVerifier{
 	}
 
 	/**
-	 * This visitor class does the actual checking for the instruction
-	 * operand's constraints.
+	 * This visitor class does the actual checking for the instruction operand's constraints.
 	 */
 	private class InstOperandConstraintVisitor extends org.apache.bcel.generic.EmptyVisitor{
-		/** The ConstantPoolGen instance this Visitor operates on. */
+		/**
+		 * The ConstantPoolGen instance this Visitor operates on.
+		 * @uml.property  name="cpg"
+		 * @uml.associationEnd  
+		 */
 		private ConstantPoolGen cpg;
 
 		/** The only Constructor. */

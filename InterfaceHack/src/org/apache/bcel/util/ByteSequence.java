@@ -64,7 +64,11 @@ import java.io.*;
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
 public final class ByteSequence extends DataInputStream {
-  private ByteArrayStream byte_stream;
+  /**
+ * @uml.property  name="byte_stream"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private ByteArrayStream byte_stream;
 
   public ByteSequence(byte[] bytes) { 
     super(new ByteArrayStream(bytes));

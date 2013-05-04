@@ -72,8 +72,16 @@ public class InstructionFactory
 	 * 
 	 */
 	private static final long serialVersionUID = 8039119527085435427L;
+/**
+ * @uml.property  name="cg"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
 protected ClassGen        cg;
-  protected ConstantPoolGen cp;
+  /**
+ * @uml.property  name="cp"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+protected ConstantPoolGen cp;
 
   public InstructionFactory(ClassGen cg, ConstantPoolGen cp) {
     this.cg = cg;
@@ -164,8 +172,19 @@ protected ClassGen        cg;
     return push.getInstruction();
   }
 
-  private static class MethodObject {
+  /**
+ * @author  walid
+ */
+private static class MethodObject {
+    /**
+	 * @uml.property  name="arg_types"
+	 * @uml.associationEnd  multiplicity="(0 -1)"
+	 */
     Type[]   arg_types;
+    /**
+	 * @uml.property  name="result_type"
+	 * @uml.associationEnd  
+	 */
     Type     result_type;
     String[] arg_names;
     String   class_name;

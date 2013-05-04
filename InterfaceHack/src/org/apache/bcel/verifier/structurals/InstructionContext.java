@@ -58,12 +58,9 @@ import org.apache.bcel.generic.InstructionHandle;
 import java.util.ArrayList;
 
 /**
- * An InstructionContext offers convenient access
- * to information like control flow successors and
- * such.
- *
- * @version $Id: InstructionContext.java,v 1.2 2006/09/04 15:43:18 andos Exp $
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * An InstructionContext offers convenient access to information like control flow successors and such.
+ * @version  $Id: InstructionContext.java,v 1.2 2006/09/04 15:43:18 andos Exp $
+ * @author  <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
  */
 public interface InstructionContext{
 
@@ -121,8 +118,9 @@ public interface InstructionContext{
 	
 	/**
 	 * Returns the InstructionHandle this InstructionContext is wrapped around.
-	 *
-	 * @return The InstructionHandle this InstructionContext is wrapped around.
+	 * @return   The InstructionHandle this InstructionContext is wrapped around.
+	 * @uml.property  name="instruction"
+	 * @uml.associationEnd  
 	 */
 	InstructionHandle getInstruction();
 

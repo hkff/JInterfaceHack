@@ -70,9 +70,20 @@ import java.io.*;
  * @author <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A> 
  */
 public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
-  private JavaClass         _clazz;
-  private PrintWriter       _out;
-  private ConstantPoolGen   _cp;
+  /**
+ * @uml.property  name="_clazz"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private JavaClass         _clazz;
+  /**
+ * @uml.property  name="_out"
+ */
+private PrintWriter       _out;
+  /**
+ * @uml.property  name="_cp"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private ConstantPoolGen   _cp;
 
   /** @param clazz Java class to "decompile"
    * @param out where to output Java program

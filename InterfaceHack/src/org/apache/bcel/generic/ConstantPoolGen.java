@@ -77,9 +77,19 @@ public class ConstantPoolGen implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 8551552812169741014L;
+/**
+ * @uml.property  name="size"
+ */
 protected int        size      = 1024; // Inital size, sufficient in most cases
-  protected Constant[] constants = new Constant[size];
-  protected int        index     = 1; // First entry (0) used by JVM
+  /**
+ * @uml.property  name="constants"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
+protected Constant[] constants = new Constant[size];
+  /**
+ * @uml.property  name="index"
+ */
+protected int        index     = 1; // First entry (0) used by JVM
 
   private static final String METHODREF_DELIM  = ":";
   private static final String IMETHODREF_DELIM = "#";
@@ -184,7 +194,11 @@ protected int        size      = 1024; // Inital size, sufficient in most cases
     }
   }
 
-  private HashMap<String, Index> string_table = new HashMap<String, Index>();
+  /**
+ * @uml.property  name="string_table"
+ * @uml.associationEnd  qualifier="str:java.lang.String org.apache.bcel.generic.ConstantPoolGen$Index"
+ */
+private HashMap<String, Index> string_table = new HashMap<String, Index>();
 
   /** 
    * Look for ConstantString in ConstantPool containing String `str'.
@@ -223,7 +237,11 @@ protected int        size      = 1024; // Inital size, sufficient in most cases
     return ret;
   }
 
-  private HashMap<String, Index> class_table = new HashMap<String, Index>();
+  /**
+ * @uml.property  name="class_table"
+ * @uml.associationEnd  qualifier="clazz:java.lang.String org.apache.bcel.generic.ConstantPoolGen$Index"
+ */
+private HashMap<String, Index> class_table = new HashMap<String, Index>();
 
   /**
    * Look for ConstantClass in ConstantPool named `str'.
@@ -365,7 +383,11 @@ protected int        size      = 1024; // Inital size, sufficient in most cases
     return ret;
   }
 
-  private HashMap<String, Index> utf8_table = new HashMap<String, Index>();
+  /**
+ * @uml.property  name="utf8_table"
+ * @uml.associationEnd  qualifier="n:java.lang.String org.apache.bcel.generic.ConstantPoolGen$Index"
+ */
+private HashMap<String, Index> utf8_table = new HashMap<String, Index>();
 
   /** 
    * Look for ConstantUtf8 in ConstantPool.
@@ -483,7 +505,11 @@ protected int        size      = 1024; // Inital size, sufficient in most cases
     return ret;
   }
 
-  private HashMap<String, Index> n_a_t_table = new HashMap<String, Index>();
+  /**
+ * @uml.property  name="n_a_t_table"
+ * @uml.associationEnd  qualifier="toString:java.lang.String org.apache.bcel.generic.ConstantPoolGen$Index"
+ */
+private HashMap<String, Index> n_a_t_table = new HashMap<String, Index>();
 
   /** 
    * Look for ConstantNameAndType in ConstantPool.
@@ -522,7 +548,11 @@ protected int        size      = 1024; // Inital size, sufficient in most cases
     return ret;
   }
 
-  private HashMap<String, Index> cp_table = new HashMap<String, Index>();
+  /**
+ * @uml.property  name="cp_table"
+ * @uml.associationEnd  qualifier="toString:java.lang.String org.apache.bcel.generic.ConstantPoolGen$Index"
+ */
+private HashMap<String, Index> cp_table = new HashMap<String, Index>();
 
   /** 
    * Look for ConstantMethodref in ConstantPool.

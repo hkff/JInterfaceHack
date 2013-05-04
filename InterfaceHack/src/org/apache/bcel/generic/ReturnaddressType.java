@@ -59,7 +59,7 @@ import org.apache.bcel.generic.InstructionHandle;
 /** 
  * Returnaddress, the type JSR or JSR_W instructions push upon the stack.
  *
- * see vmspec2 §3.3.3
+ * see vmspec2 ï¿½3.3.3
  * @version $Id: ReturnaddressType.java,v 1.2 2006/08/23 13:48:30 andos Exp $
  * @author  <A HREF="http://www.inf.fu-berlin.de/~ehaase">Enver Haase</A>
  */
@@ -70,7 +70,11 @@ public class ReturnaddressType extends Type {
 	 */
 	private static final long serialVersionUID = 4736133533279893837L;
 public static final ReturnaddressType NO_TARGET = new ReturnaddressType();
-  private InstructionHandle returnTarget;
+  /**
+ * @uml.property  name="returnTarget"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private InstructionHandle returnTarget;
  
   /**
    * A Returnaddress [that doesn't know where to return to].

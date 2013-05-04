@@ -107,7 +107,10 @@ public class Subroutines{
 		 */
 		private int localVariable = UNSET;
 
-		/** The instructions that belong to this subroutine. */
+		/**
+		 * The instructions that belong to this subroutine.
+		 * @uml.property  name="instructions"
+		 */
 		private HashSet<InstructionHandle> instructions = new HashSet<InstructionHandle>(); // Elements: InstructionHandle
 		
 		/*
@@ -125,6 +128,8 @@ public class Subroutines{
 		
 		/**
 		 * The RET instruction that leaves this subroutine.
+		 * @uml.property  name="theRET"
+		 * @uml.associationEnd  
 		 */
 		private InstructionHandle theRET;
 		
@@ -229,6 +234,10 @@ public class Subroutines{
 		
 		/*
 		 * Refer to the Subroutine interface for documentation.
+		 */
+		/**
+		 * @return
+		 * @uml.property  name="instructions"
 		 */
 		public InstructionHandle[] getInstructions(){
 			InstructionHandle[] ret = new InstructionHandle[instructions.size()];
@@ -346,6 +355,10 @@ public class Subroutines{
 		 * This subroutine's RET operates on that same local variable
 		 * slot, of course.
 		 */
+		/**
+		 * @param i
+		 * @uml.property  name="localVariable"
+		 */
 		void setLocalVariable(int i){
 			if (localVariable != UNSET){
 				throw new AssertionViolatedException("localVariable set twice.");
@@ -364,17 +377,16 @@ public class Subroutines{
 	}// end Inner Class SubrouteImpl
 
 	/**
-	 * The Hashtable containing the subroutines found.
-	 * Key: InstructionHandle of the leader of the subroutine.
-	 * Elements: SubroutineImpl objects.
+	 * The Hashtable containing the subroutines found. Key: InstructionHandle of the leader of the subroutine. Elements: SubroutineImpl objects.
+	 * @uml.property  name="subroutines"
+	 * @uml.associationEnd  qualifier="leader:org.apache.bcel.generic.InstructionHandle org.apache.bcel.verifier.structurals.Subroutine"
 	 */
 	private Hashtable<InstructionHandle, Subroutine> subroutines = new Hashtable<InstructionHandle, Subroutine>();
 
 	/**
-	 * This is referring to a special subroutine, namely the
-	 * top level. This is not really a subroutine but we use
-	 * it to distinguish between top level instructions and
-	 * unreachable instructions.
+	 * This is referring to a special subroutine, namely the top level. This is not really a subroutine but we use it to distinguish between top level instructions and unreachable instructions.
+	 * @uml.property  name="tOPLEVEL"
+	 * @uml.associationEnd  multiplicity="(1 1)"
 	 */
 	public final Subroutine TOPLEVEL;
 

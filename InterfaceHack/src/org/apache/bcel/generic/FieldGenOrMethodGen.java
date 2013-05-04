@@ -60,27 +60,47 @@ import org.apache.bcel.classfile.*;
 import java.util.ArrayList;
 
 /**
- * Super class for FieldGen and MethodGen objects, since they have some methods
- * in common!
- * 
- * @version $Id: FieldGenOrMethodGen.java,v 1.3 2006/08/23 13:48:30 andos Exp $
- * @author <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * Super class for FieldGen and MethodGen objects, since they have some methods in common!
+ * @version  $Id: FieldGenOrMethodGen.java,v 1.3 2006/08/23 13:48:30 andos Exp $
+ * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
 public abstract class FieldGenOrMethodGen extends AccessFlags implements
 		NamedAndTyped, Cloneable {
+	/**
+	 * @uml.property  name="name"
+	 */
 	protected String name;
 
+	/**
+	 * @uml.property  name="descriptor"
+	 */
 	protected String descriptor;
 
+	/**
+	 * @uml.property  name="type"
+	 * @uml.associationEnd  
+	 */
 	protected Type type;
 
+	/**
+	 * @uml.property  name="cp"
+	 * @uml.associationEnd  
+	 */
 	protected ConstantPoolGen cp;
 
+	/**
+	 * @uml.property  name="attribute_vec"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="org.apache.bcel.classfile.Attribute"
+	 */
 	private ArrayList<Attribute> attribute_vec = new ArrayList<Attribute>();
 
 	protected FieldGenOrMethodGen() {
 	}
 
+	/**
+	 * @param type
+	 * @uml.property  name="type"
+	 */
 	public void setType(Type type) {
 		if (type.getType() == Constants.T_ADDRESS)
 			throw new IllegalArgumentException("Type can not be " + type);
@@ -88,21 +108,34 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements
 		this.type = type;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="type"
+	 */
 	public Type getType() {
 		return type;
 	}
 
 	/**
-	 * @return name of method/field.
+	 * @return  name of method/field.
+	 * @uml.property  name="name"
 	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * @param name
+	 * @uml.property  name="name"
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * @param descriptor
+	 * @uml.property  name="descriptor"
+	 */
 	public void setDescriptor(String descriptor) {
 		this.descriptor = descriptor;
 		
@@ -152,7 +185,8 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements
 	}
 
 	/**
-	 * @return signature of method/field.
+	 * @return  signature of method/field.
+	 * @uml.property  name="signature"
 	 */
 	public abstract String getSignature();
 

@@ -75,10 +75,26 @@ public final class CodeExceptionGen
   implements InstructionTargeter, Cloneable, java.io.Serializable {
 
 	private static final long serialVersionUID = 6548901422158960190L;
+/**
+ * @uml.property  name="start_pc"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
 private InstructionHandle start_pc;
-  private InstructionHandle end_pc;
-  private InstructionHandle handler_pc;
-  private ObjectType        catch_type;
+  /**
+ * @uml.property  name="end_pc"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private InstructionHandle end_pc;
+  /**
+ * @uml.property  name="handler_pc"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private InstructionHandle handler_pc;
+  /**
+ * @uml.property  name="catch_type"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private ObjectType        catch_type;
   
   /**
    * Add an exception handler, i.e., specify region where a handler is active and an

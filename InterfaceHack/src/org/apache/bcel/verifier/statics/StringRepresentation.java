@@ -74,9 +74,16 @@ import org.apache.bcel.verifier.exc.*;
  * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
  */
 public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor implements Visitor{
-	/** The string representation, created by a visitXXX() method, output by toString(). */
+	/**
+	 * The string representation, created by a visitXXX() method, output by toString().
+	 * @uml.property  name="tostring"
+	 */
 	private String tostring;
-  /** The node we ask for its string representation. Not really needed; only for debug output. */
+  /**
+ * The node we ask for its string representation. Not really needed; only for debug output.
+ * @uml.property  name="n"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
   private Node n;
 	/**
 	 * Creates a new StringRepresentation object which is the representation of n.

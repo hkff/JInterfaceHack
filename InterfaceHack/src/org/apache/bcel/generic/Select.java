@@ -67,12 +67,31 @@ import org.apache.bcel.util.ByteSequence;
  */
 public abstract class Select extends BranchInstruction implements
 		VariableLengthInstruction, StackProducer {
+	/**
+	 * @uml.property  name="match" multiplicity="(0 -1)" dimension="1"
+	 */
 	protected int[] match; // matches, i.e., case 1: ...
+	/**
+	 * @uml.property  name="indices"
+	 */
 	protected int[] indices; // target offsets
+	/**
+	 * @uml.property  name="targets"
+	 * @uml.associationEnd  multiplicity="(0 -1)"
+	 */
 	protected InstructionHandle[] targets; // target objects in instruction
 											// list
+	/**
+	 * @uml.property  name="fixed_length"
+	 */
 	protected int fixed_length; // fixed length defined by subclasses
+	/**
+	 * @uml.property  name="match_length"
+	 */
 	protected int match_length; // number of cases
+	/**
+	 * @uml.property  name="padding"
+	 */
 	protected int padding = 0; // number of pad bytes for alignment
 
 	/**
@@ -289,14 +308,16 @@ public abstract class Select extends BranchInstruction implements
 	}
 
 	/**
-	 * @return array of match target offsets
+	 * @return  array of match target offsets
+	 * @uml.property  name="indices"
 	 */
 	public int[] getIndices() {
 		return indices;
 	}
 
 	/**
-	 * @return array of match targets
+	 * @return  array of match targets
+	 * @uml.property  name="targets"
 	 */
 	public InstructionHandle[] getTargets() {
 		return targets;

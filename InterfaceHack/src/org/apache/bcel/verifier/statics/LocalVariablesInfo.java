@@ -67,7 +67,11 @@ import org.apache.bcel.verifier.exc.*;
  */
 public class LocalVariablesInfo{
 	
-	/** The information about the local variables is stored here. */
+	/**
+	 * The information about the local variables is stored here.
+	 * @uml.property  name="localVariableInfos"
+	 * @uml.associationEnd  multiplicity="(0 -1)"
+	 */
 	private LocalVariableInfo[] localVariableInfos;
 
 	/** The constructor. */

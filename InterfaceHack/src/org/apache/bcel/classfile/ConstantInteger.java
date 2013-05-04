@@ -73,6 +73,9 @@ public final class ConstantInteger extends Constant implements ConstantObject {
 	 * 
 	 */
 	private static final long serialVersionUID = -7404634015484630545L;
+/**
+ * @uml.property  name="bytes"
+ */
 private int bytes;
 
   /** 
@@ -126,13 +129,15 @@ private int bytes;
   }
 
   /**
-   * @return data, i.e., 4 bytes.
-   */  
+ * @return  data, i.e., 4 bytes.
+ * @uml.property  name="bytes"
+ */  
   public final int getBytes() { return bytes; }
 
   /**
-   * @param bytes.
-   */
+ * @param  bytes.
+ * @uml.property  name="bytes"
+ */
   public final void setBytes(int bytes) {
     this.bytes = bytes;
   }

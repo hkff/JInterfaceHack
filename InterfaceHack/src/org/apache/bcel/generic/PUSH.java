@@ -65,7 +65,11 @@ import org.apache.bcel.Constants;
 public final class PUSH
   implements CompoundInstruction, VariableLengthInstruction, InstructionConstants
 {
-  private Instruction instruction;
+  /**
+ * @uml.property  name="instruction"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private Instruction instruction;
 
   /**
    * This constructor also applies for values of type short, char, byte 
@@ -181,7 +185,11 @@ public final class PUSH
     return new InstructionList(instruction);
   }
 
-  public final Instruction getInstruction() {
+  /**
+ * @return
+ * @uml.property  name="instruction"
+ */
+public final Instruction getInstruction() {
     return instruction;
   }
 

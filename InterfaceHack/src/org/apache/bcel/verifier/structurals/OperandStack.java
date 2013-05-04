@@ -68,10 +68,17 @@ import java.util.*;
  */
 public class OperandStack{
 
-	/** We hold the stack information here. */
+	/**
+	 * We hold the stack information here.
+	 * @uml.property  name="stack"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="org.apache.bcel.generic.ObjectType"
+	 */
 	private ArrayList<Type> stack = new ArrayList<Type>();
 
-	/** The maximum number of stack slots this OperandStack instance may hold. */
+	/**
+	 * The maximum number of stack slots this OperandStack instance may hold.
+	 * @uml.property  name="maxStack"
+	 */
 	private int maxStack;
 
 	/**

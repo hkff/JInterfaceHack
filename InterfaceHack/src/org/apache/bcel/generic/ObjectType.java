@@ -68,6 +68,9 @@ public final class ObjectType extends ReferenceType {
 	 * 
 	 */
 	private static final long serialVersionUID = -7398917392736685811L;
+/**
+ * @uml.property  name="class_name"
+ */
 private String class_name; // Class name of type
 
   /**
@@ -125,7 +128,7 @@ private String class_name; // Class name of type
   }
 
   /**
-   * Java Virtual Machine Specification edition 2, § 5.4.4 Access Control
+   * Java Virtual Machine Specification edition 2, ï¿½ 5.4.4 Access Control
    */
   public boolean accessibleTo(ObjectType accessor) {
     JavaClass jc = Repository.lookupClass(class_name);

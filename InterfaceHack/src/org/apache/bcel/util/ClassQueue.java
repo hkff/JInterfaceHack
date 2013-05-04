@@ -69,6 +69,10 @@ public class ClassQueue implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 685144104322420292L;
+/**
+ * @uml.property  name="vec"
+ * @uml.associationEnd  multiplicity="(0 -1)" elementType="org.apache.bcel.classfile.JavaClass"
+ */
 protected LinkedList<JavaClass> vec  = new LinkedList<JavaClass>();
 
   public void enqueue(JavaClass clazz) { vec.addLast(clazz); }

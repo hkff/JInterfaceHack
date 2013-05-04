@@ -83,12 +83,26 @@ import org.apache.bcel.classfile.*;
  * @see ClassPath
  */
 public class ClassLoader extends java.lang.ClassLoader {
-  private Hashtable<String, Class> classes = new Hashtable<String, Class>(); // Hashtable is synchronized thus thread-safe
-  private String[] ignored_packages = {
+  /**
+ * @uml.property  name="classes"
+ * @uml.associationEnd  qualifier="class_name:java.lang.String java.lang.Class"
+ */
+private Hashtable<String, Class> classes = new Hashtable<String, Class>(); // Hashtable is synchronized thus thread-safe
+  /**
+ * @uml.property  name="ignored_packages" multiplicity="(0 -1)" dimension="1"
+ */
+private String[] ignored_packages = {
     "java.", "javax.", "sun."
   };
-  private Repository repository = SyntheticRepository.getInstance();
-  private java.lang.ClassLoader deferTo = ClassLoader.getSystemClassLoader();
+  /**
+ * @uml.property  name="repository"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private Repository repository = SyntheticRepository.getInstance();
+  /**
+ * @uml.property  name="deferTo"
+ */
+private java.lang.ClassLoader deferTo = ClassLoader.getSystemClassLoader();
 
   public ClassLoader() {
   }

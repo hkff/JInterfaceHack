@@ -66,12 +66,29 @@ import java.util.BitSet;
  * 
  */
 final class CodeHTML implements org.apache.bcel.Constants {
-  private String 	class_name;     // name of current class
+  /**
+ * @uml.property  name="class_name"
+ */
+private String 	class_name;     // name of current class
   //private Method[]	methods;	// Methods to print
-  private PrintWriter	file;		// file to write to
-  private BitSet    	goto_set;
-  private ConstantPool  constant_pool;
-  private ConstantHTML  constant_html;
+  /**
+ * @uml.property  name="file"
+ */
+private PrintWriter	file;		// file to write to
+  /**
+ * @uml.property  name="goto_set"
+ */
+private BitSet    	goto_set;
+  /**
+ * @uml.property  name="constant_pool"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private ConstantPool  constant_pool;
+  /**
+ * @uml.property  name="constant_html"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private ConstantHTML  constant_html;
   private static boolean wide=false;
 
   CodeHTML(String dir, String class_name,

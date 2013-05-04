@@ -69,9 +69,20 @@ import java.util.*;
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
 class BCELFactory extends EmptyVisitor {
-  private MethodGen       _mg;
-  private PrintWriter     _out;
-  private ConstantPoolGen _cp;
+  /**
+ * @uml.property  name="_mg"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private MethodGen       _mg;
+  /**
+ * @uml.property  name="_out"
+ */
+private PrintWriter     _out;
+  /**
+ * @uml.property  name="_cp"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private ConstantPoolGen _cp;
 
   BCELFactory(MethodGen mg, PrintWriter out) {
     _mg  = mg;
@@ -79,7 +90,11 @@ class BCELFactory extends EmptyVisitor {
     _out = out;
   }
 
-  private HashMap<Instruction, InstructionHandle> branch_map = new HashMap<Instruction, InstructionHandle>(); // Map<Instruction, InstructionHandle>
+  /**
+ * @uml.property  name="branch_map"
+ * @uml.associationEnd  qualifier="bi:org.apache.bcel.generic.BranchInstruction org.apache.bcel.generic.BranchHandle"
+ */
+private HashMap<Instruction, InstructionHandle> branch_map = new HashMap<Instruction, InstructionHandle>(); // Map<Instruction, InstructionHandle>
 
   public void start() {
     if(!_mg.isAbstract() && !_mg.isNative()) {
@@ -254,7 +269,11 @@ class BCELFactory extends EmptyVisitor {
   }
 
   // Memorize BranchInstructions that need an update
-  private ArrayList<BranchInstruction> branches = new ArrayList<BranchInstruction>();
+  /**
+ * @uml.property  name="branches"
+ * @uml.associationEnd  multiplicity="(0 -1)" elementType="org.apache.bcel.generic.BranchInstruction"
+ */
+private ArrayList<BranchInstruction> branches = new ArrayList<BranchInstruction>();
 
   public void visitBranchInstruction(BranchInstruction bi) {
     BranchHandle bh   = (BranchHandle)branch_map.get(bi);

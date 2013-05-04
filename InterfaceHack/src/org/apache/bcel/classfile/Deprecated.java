@@ -71,6 +71,10 @@ public final class Deprecated extends Attribute {
 	 * 
 	 */
 	private static final long serialVersionUID = -5999813979659780214L;
+/**
+ * @uml.property  name="bytes"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
 private byte[] bytes;
 
   /**
@@ -140,13 +144,15 @@ private byte[] bytes;
   }    
 
   /**
-   * @return data bytes.
-   */  
+ * @return  data bytes.
+ * @uml.property  name="bytes"
+ */  
   public final byte[] getBytes() { return bytes; }    
 
   /**
-   * @param bytes.
-   */
+ * @param  bytes.
+ * @uml.property  name="bytes"
+ */
   public final void setBytes(byte[] bytes) {
     this.bytes = bytes;
   }    

@@ -69,6 +69,9 @@ import  java.io.*;
 public final class ConstantClass extends Constant implements ConstantObject {
 
 	private static final long serialVersionUID = 3486464199114509784L;
+/**
+ * @uml.property  name="name_index"
+ */
 private int name_index; // Identical to ConstantString except for the name
 
   /**

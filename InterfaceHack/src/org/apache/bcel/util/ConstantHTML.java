@@ -66,13 +66,37 @@ import java.io.*;
  * 
  */
 final class ConstantHTML implements org.apache.bcel.Constants {
-  private String 	class_name;     // name of current class
-  private String 	class_package;  // name of package
-  private ConstantPool 	constant_pool;  // reference to constant pool
-  private PrintWriter	file;		// file to write to
-  private String[]  	constant_ref;	// String to return for cp[i]
-  private Constant[]	constants;	// The constants in the cp
-  private Method[]      methods;
+  /**
+ * @uml.property  name="class_name"
+ */
+private String 	class_name;     // name of current class
+  /**
+ * @uml.property  name="class_package"
+ */
+private String 	class_package;  // name of package
+  /**
+ * @uml.property  name="constant_pool"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private ConstantPool 	constant_pool;  // reference to constant pool
+  /**
+ * @uml.property  name="file"
+ */
+private PrintWriter	file;		// file to write to
+  /**
+ * @uml.property  name="constant_ref" multiplicity="(0 -1)" dimension="1"
+ */
+private String[]  	constant_ref;	// String to return for cp[i]
+  /**
+ * @uml.property  name="constants"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
+private Constant[]	constants;	// The constants in the cp
+  /**
+ * @uml.property  name="methods"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
+private Method[]      methods;
 
   ConstantHTML(String dir, String class_name, String class_package, Method[] methods,
 	       ConstantPool constant_pool) throws IOException

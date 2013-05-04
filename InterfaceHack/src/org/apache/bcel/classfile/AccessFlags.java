@@ -64,7 +64,10 @@ import  org.apache.bcel.Constants;
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
 public abstract class AccessFlags implements java.io.Serializable {
-  protected int access_flags;
+  /**
+ * @uml.property  name="access_flags"
+ */
+protected int access_flags;
   
   public AccessFlags() {}
 

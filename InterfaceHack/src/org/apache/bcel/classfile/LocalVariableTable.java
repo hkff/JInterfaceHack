@@ -71,8 +71,15 @@ public class LocalVariableTable extends Attribute {
 	 * 
 	 */
 	private static final long serialVersionUID = -5508072570746376615L;
+/**
+ * @uml.property  name="local_variable_table_length"
+ */
 private int             local_variable_table_length; // Table of local
-  private LocalVariable[] local_variable_table;        // variables
+  /**
+ * @uml.property  name="local_variable_table"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
+private LocalVariable[] local_variable_table;        // variables
 
   /**
    * Initialize from another object. Note that both objects use the same

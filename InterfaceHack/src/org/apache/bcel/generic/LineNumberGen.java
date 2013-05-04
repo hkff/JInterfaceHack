@@ -72,8 +72,15 @@ public class LineNumberGen
 	 * 
 	 */
 	private static final long serialVersionUID = 4939965573936108738L;
+/**
+ * @uml.property  name="ih"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
 private InstructionHandle ih;
-  private int               src_line;
+  /**
+ * @uml.property  name="src_line"
+ */
+private int               src_line;
 
   /**
    * Create a line number.

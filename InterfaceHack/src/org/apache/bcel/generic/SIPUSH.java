@@ -69,6 +69,9 @@ public class SIPUSH extends Instruction implements ConstantPushInstruction {
 	 * 
 	 */
 	private static final long serialVersionUID = -5670145672311191256L;
+/**
+ * @uml.property  name="b"
+ */
 private short b;
 
   /**

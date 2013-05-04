@@ -82,21 +82,76 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
 	 * 
 	 */
 	private static final long serialVersionUID = 5569774080827640755L;
+/**
+ * @uml.property  name="file_name"
+ */
 private String       file_name;
-  private String       package_name;
-  private String       source_file_name = "<Unknown>";
-  private int          class_name_index;
-  private int          superclass_name_index;
-  private String       class_name;
-  private String       superclass_name;
-  private int          major, minor;  // Compiler version
-  private ConstantPool constant_pool; // Constant pool
-  private int[]        interfaces;    // implemented interfaces
-  private String[]     interface_names;
-  private Field[]      fields;        // Fields, i.e., variables of class
-  private Method[]     methods;       // methods defined in the class
-  private Attribute[]  attributes;    // attributes defined in the class
-  private byte         source = HEAP; // Generated in memory
+  /**
+ * @uml.property  name="package_name"
+ */
+private String       package_name;
+  /**
+ * @uml.property  name="source_file_name"
+ */
+private String       source_file_name = "<Unknown>";
+  /**
+ * @uml.property  name="class_name_index"
+ */
+private int          class_name_index;
+  /**
+ * @uml.property  name="superclass_name_index"
+ */
+private int          superclass_name_index;
+  /**
+ * @uml.property  name="class_name"
+ */
+private String       class_name;
+  /**
+ * @uml.property  name="superclass_name"
+ */
+private String       superclass_name;
+  /**
+ * @uml.property  name="major"
+ */
+private int          major;  // Compiler version
+/**
+ * @uml.property  name="minor"
+ */
+private int minor;
+  /**
+ * @uml.property  name="constant_pool"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private ConstantPool constant_pool; // Constant pool
+  /**
+ * @uml.property  name="interfaces"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
+private int[]        interfaces;    // implemented interfaces
+  /**
+ * @uml.property  name="interface_names"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
+private String[]     interface_names;
+  /**
+ * @uml.property  name="fields"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
+private Field[]      fields;        // Fields, i.e., variables of class
+  /**
+ * @uml.property  name="methods"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
+private Method[]     methods;       // methods defined in the class
+  /**
+ * @uml.property  name="attributes"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
+private Attribute[]  attributes;    // attributes defined in the class
+  /**
+ * @uml.property  name="source"
+ */
+private byte         source = HEAP; // Generated in memory
 
   public static final byte HEAP = 1;
   public static final byte FILE = 2;
@@ -106,10 +161,10 @@ private String       file_name;
   static char    sep   = '/';   // directory separator
 
   /**
-   * In cases where we go ahead and create something,
-   * use the default SyntheticRepository, because we
-   * don't know any better.
-   */
+ * In cases where we go ahead and create something, use the default SyntheticRepository, because we don't know any better.
+ * @uml.property  name="repository"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
   private transient org.apache.bcel.util.Repository repository = 
     SyntheticRepository.getInstance();
 
@@ -353,8 +408,9 @@ private String       file_name;
   }
 
   /**
-   * @return Attributes of the class.
-   */
+ * @return  Attributes of the class.
+ * @uml.property  name="attributes"
+ */
   public Attribute[] getAttributes() { return attributes; }
 
   /**
@@ -378,10 +434,9 @@ private String       file_name;
   public ConstantPool getConstantPool() { return constant_pool; }
 
   /**
-   * @return Fields, i.e., variables of the class. Like the JVM spec
-   * mandates for the classfile format, these fields are those specific to
-   * this class, and not those of the superclass or superinterfaces.
-   */
+ * @return  Fields, i.e., variables of the class. Like the JVM spec  mandates for the classfile format, these fields are those specific to  this class, and not those of the superclass or superinterfaces.
+ * @uml.property  name="fields"
+ */
   public Field[] getFields()         { return fields; }    
 
   /**
@@ -400,13 +455,15 @@ private String       file_name;
   public int[] getInterfaceIndices()     { return interfaces; }    
 
   /**
-   * @return Major number of class file version.
-   */
+ * @return  Major number of class file version.
+ * @uml.property  name="major"
+ */
   public int  getMajor()           { return major; }    
 
   /**
-   * @return Methods of the class.
-   */
+ * @return  Methods of the class.
+ * @uml.property  name="methods"
+ */
   public Method[] getMethods()       { return methods; }    
 
   /**
@@ -428,8 +485,9 @@ private String       file_name;
   }
 
   /**
-   * @return Minor number of class file version.
-   */
+ * @return  Minor number of class file version.
+ * @uml.property  name="minor"
+ */
   public int  getMinor()           { return minor; }    
 
   /**
@@ -464,8 +522,9 @@ private String       file_name;
   }
 
   /**
-   * @param attributes .
-   */
+ * @param attributes  .
+ * @uml.property  name="attributes"
+ */
   public void setAttributes(Attribute[] attributes) {
     this.attributes = attributes;
   }    
@@ -492,8 +551,9 @@ private String       file_name;
   }    
 
   /**
-   * @param fields .
-   */
+ * @param fields  .
+ * @uml.property  name="fields"
+ */
   public void setFields(Field[] fields) {
     this.fields = fields;
   }    
@@ -513,29 +573,33 @@ private String       file_name;
   }    
 
   /**
-   * @param interfaces .
-   */
+ * @param interfaces  .
+ * @uml.property  name="interfaces"
+ */
   public void setInterfaces(int[] interfaces) {
     this.interfaces = interfaces;
   }    
 
   /**
-   * @param major .
-   */
+ * @param major  .
+ * @uml.property  name="major"
+ */
   public void setMajor(int major) {
     this.major = major;
   }    
 
   /**
-   * @param methods .
-   */
+ * @param methods  .
+ * @uml.property  name="methods"
+ */
   public void setMethods(Method[] methods) {
     this.methods = methods;
   }    
 
   /**
-   * @param minor .
-   */
+ * @param minor  .
+ * @uml.property  name="minor"
+ */
   public void setMinor(int minor) {
     this.minor = minor;
   }    
@@ -663,8 +727,10 @@ private String       file_name;
     return (access_flags & Constants.ACC_INTERFACE) == 0;
   }
 
-  /** @return returns either HEAP (generated), FILE, or ZIP
-   */
+  /**
+ * @return  returns either HEAP (generated), FILE, or ZIP
+ * @uml.property  name="source"
+ */
   public final byte getSource() {
     return source;
   }
@@ -672,17 +738,17 @@ private String       file_name;
   /********************* New repository functionality *********************/
 
   /**
-   * Gets the ClassRepository which holds its definition. By default
-   * this is the same as SyntheticRepository.getInstance();
-   */
+ * New repository functionality
+ * @uml.property  name="repository"
+ */
   public org.apache.bcel.util.Repository getRepository() {
     return repository;
   }
 
   /**
-   * Sets the ClassRepository which loaded the JavaClass.
-   * Should be called immediately after parsing is done.
-   */
+ * Sets the ClassRepository which loaded the JavaClass. Should be called immediately after parsing is done.
+ * @uml.property  name="repository"
+ */
   public void setRepository(org.apache.bcel.util.Repository repository) {
     this.repository = repository;
   }

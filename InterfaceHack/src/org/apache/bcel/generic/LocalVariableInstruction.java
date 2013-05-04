@@ -65,9 +65,18 @@ import org.apache.bcel.Constants;
  */
 public abstract class LocalVariableInstruction extends Instruction
   implements TypedInstruction, IndexedInstruction {
-  protected int     n         = -1; // index of referenced variable
-  private short     c_tag     = -1; // compact version, such as ILOAD_0
-  private short     canon_tag = -1; // canonical tag such as ILOAD
+  /**
+ * @uml.property  name="n"
+ */
+protected int     n         = -1; // index of referenced variable
+  /**
+ * @uml.property  name="c_tag"
+ */
+private short     c_tag     = -1; // compact version, such as ILOAD_0
+  /**
+ * @uml.property  name="canon_tag"
+ */
+private short     canon_tag = -1; // canonical tag such as ILOAD
 
   private final boolean wide() { return n > Constants.MAX_BYTE; }
 

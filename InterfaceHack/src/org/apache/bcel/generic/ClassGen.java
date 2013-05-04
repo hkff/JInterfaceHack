@@ -74,17 +74,62 @@ public class ClassGen extends AccessFlags implements Cloneable {
 	private static final long serialVersionUID = 1030389262306646953L;
 /* Corresponds to the fields found in a JavaClass object.
    */
-  private String   class_name, super_class_name, file_name;
-  private int      class_name_index = -1, superclass_name_index = -1;
-  private int      major = Constants.MAJOR_1_1, minor = Constants.MINOR_1_1;
+  /**
+ * @uml.property  name="class_name"
+ */
+private String   class_name;
+/**
+ * @uml.property  name="super_class_name"
+ */
+private String super_class_name;
+/**
+ * @uml.property  name="file_name"
+ */
+private String file_name;
+  /**
+ * @uml.property  name="class_name_index"
+ */
+private int      class_name_index = -1;
+/**
+ * @uml.property  name="superclass_name_index"
+ */
+private int superclass_name_index = -1;
+  /**
+ * @uml.property  name="major"
+ */
+private int      major = Constants.MAJOR_1_1;
+/**
+ * @uml.property  name="minor"
+ */
+private int minor = Constants.MINOR_1_1;
 
-  private ConstantPoolGen cp; // Template for building up constant pool
+  /**
+ * @uml.property  name="cp"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private ConstantPoolGen cp; // Template for building up constant pool
 
   // ArrayLists instead of arrays to gather fields, methods, etc.
-  private ArrayList<Field>   field_vec	 = new ArrayList<Field>();
-  private ArrayList<Method>   method_vec    = new ArrayList<Method>();
-  private ArrayList<Attribute>   attribute_vec = new ArrayList<Attribute>();
-  private ArrayList<String>   interface_vec = new ArrayList<String>();
+  /**
+ * @uml.property  name="field_vec"
+ * @uml.associationEnd  multiplicity="(0 -1)" elementType="org.apache.bcel.classfile.Field"
+ */
+private ArrayList<Field>   field_vec	 = new ArrayList<Field>();
+  /**
+ * @uml.property  name="method_vec"
+ * @uml.associationEnd  multiplicity="(0 -1)" elementType="org.apache.bcel.classfile.Method"
+ */
+private ArrayList<Method>   method_vec    = new ArrayList<Method>();
+  /**
+ * @uml.property  name="attribute_vec"
+ * @uml.associationEnd  multiplicity="(0 -1)" elementType="org.apache.bcel.classfile.Attribute"
+ */
+private ArrayList<Attribute>   attribute_vec = new ArrayList<Attribute>();
+  /**
+ * @uml.property  name="interface_vec"
+ * @uml.associationEnd  multiplicity="(0 -1)" elementType="java.lang.String"
+ */
+private ArrayList<String>   interface_vec = new ArrayList<String>();
 
   /** Convenience constructor to set up some important values initially.
    *
@@ -197,27 +242,33 @@ public class ClassGen extends AccessFlags implements Cloneable {
   }
 
   /**
-   * @return major version number of class file
-   */
+ * @return  major version number of class file
+ * @uml.property  name="major"
+ */
   public int  getMajor()      { return major; }
 
-  /** Set major version number of class file, default value is 45 (JDK 1.1)
-   * @param major major version number
-   */
+  /**
+ * Set major version number of class file, default value is 45 (JDK 1.1)
+ * @param major  major version number
+ * @uml.property  name="major"
+ */
   public void setMajor(int major) {
     this.major = major;
   }    
 
-  /** Set minor version number of class file, default value is 3 (JDK 1.1)
-   * @param minor minor version number
-   */
+  /**
+ * Set minor version number of class file, default value is 3 (JDK 1.1)
+ * @param minor  minor version number
+ * @uml.property  name="minor"
+ */
   public void setMinor(int minor) {
     this.minor = minor;
   }    
 
   /**
-   * @return minor version number of class file
-   */
+ * @return  minor version number of class file
+ * @uml.property  name="minor"
+ */
   public int  getMinor()      { return minor; }
 
   /**
@@ -416,7 +467,11 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
   public int getClassNameIndex()   { return class_name_index; }
 
-  private ArrayList<ClassObserver> observers;
+  /**
+ * @uml.property  name="observers"
+ * @uml.associationEnd  multiplicity="(0 -1)" elementType="org.apache.bcel.generic.ClassObserver"
+ */
+private ArrayList<ClassObserver> observers;
 
   /** Add observer for this object.
    */

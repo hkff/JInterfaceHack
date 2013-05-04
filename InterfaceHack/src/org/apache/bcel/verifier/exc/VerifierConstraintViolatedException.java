@@ -69,7 +69,10 @@ public abstract class VerifierConstraintViolatedException extends RuntimeExcepti
 	// /** The name of the offending class that did not pass the verifier. */
 	// String name_of_offending_class;
 
-	/** The specified error message. */
+	/**
+	 * The specified error message.
+	 * @uml.property  name="detailMessage"
+	 */
 	private String detailMessage;
 	/**
 	 * Constructs a new VerifierConstraintViolatedException with null as its error message string.

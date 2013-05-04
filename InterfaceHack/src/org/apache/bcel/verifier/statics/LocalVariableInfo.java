@@ -69,9 +69,17 @@ import java.util.Hashtable;
  */
 public class LocalVariableInfo{
 
-	/** The types database. KEY: String representing the offset integer. */
+	/**
+	 * The types database. KEY: String representing the offset integer.
+	 * @uml.property  name="types"
+	 * @uml.associationEnd  qualifier="toString:java.lang.String org.apache.bcel.generic.Type"
+	 */
 	private Hashtable<String, Type> types = new Hashtable<String, Type>();
-	/** The names database. KEY: String representing the offset integer. */
+	/**
+	 * The names database. KEY: String representing the offset integer.
+	 * @uml.property  name="names"
+	 * @uml.associationEnd  qualifier="toString:java.lang.String java.lang.String"
+	 */
 	private Hashtable<String, String> names = new Hashtable<String, String>();
 
 	/**

@@ -66,9 +66,16 @@ import  org.apache.bcel.Constants;
  * @see     ConstantInterfaceMethodref
  */
 public abstract class ConstantCP extends Constant {
-  /** References to the constants containing the class and the field signature
-   */
-  protected int class_index, name_and_type_index; 
+  /**
+ * References to the constants containing the class and the field signature
+ * @uml.property  name="class_index"
+ */
+  protected int class_index;
+/**
+ * References to the constants containing the class and the field signature
+ * @uml.property  name="name_and_type_index"
+ */
+protected int name_and_type_index; 
 
   /**
    * Initialize from another object.

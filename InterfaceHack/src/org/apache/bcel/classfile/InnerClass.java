@@ -67,10 +67,22 @@ import  java.io.*;
  * @see InnerClasses
  */
 public final class InnerClass implements Cloneable, Node {
-  private int inner_class_index;
-  private int outer_class_index;
-  private int inner_name_index;
-  private int inner_access_flags;
+  /**
+ * @uml.property  name="inner_class_index"
+ */
+private int inner_class_index;
+  /**
+ * @uml.property  name="outer_class_index"
+ */
+private int outer_class_index;
+  /**
+ * @uml.property  name="inner_name_index"
+ */
+private int inner_name_index;
+  /**
+ * @uml.property  name="inner_access_flags"
+ */
+private int inner_access_flags;
 
   /**
    * Initialize from another object.

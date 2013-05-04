@@ -76,10 +76,29 @@ public class LocalVariableGen
 	 * 
 	 */
 	private static final long serialVersionUID = 9160137002643478976L;
+/**
+ * @uml.property  name="index"
+ */
 private int         index;
-  private String      name;
-  private Type        type;
-  private InstructionHandle start, end;
+  /**
+ * @uml.property  name="name"
+ */
+private String      name;
+  /**
+ * @uml.property  name="type"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private Type        type;
+  /**
+ * @uml.property  name="start"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private InstructionHandle start;
+/**
+ * @uml.property  name="end"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private InstructionHandle end;
 
   /**
    * Generate a local variable that with index `index'. Note that double and long
@@ -132,22 +151,62 @@ private int         index;
 			     signature_index, index, cp.getConstantPool());
   }
 
-  public void        setIndex(int index)           { this.index = index; }
-  public int         getIndex()                   { return index; }
-  public void        setName(String name)        { this.name = name; }
-  public String      getName()                   { return name; }
-  public void        setType(Type type)          { this.type = type; }
-  public Type        getType()                   { return type; }
+  /**
+ * @param index
+ * @uml.property  name="index"
+ */
+public void        setIndex(int index)           { this.index = index; }
+  /**
+ * @return
+ * @uml.property  name="index"
+ */
+public int         getIndex()                   { return index; }
+  /**
+ * @param name
+ * @uml.property  name="name"
+ */
+public void        setName(String name)        { this.name = name; }
+  /**
+ * @return
+ * @uml.property  name="name"
+ */
+public String      getName()                   { return name; }
+  /**
+ * @param type
+ * @uml.property  name="type"
+ */
+public void        setType(Type type)          { this.type = type; }
+  /**
+ * @return
+ * @uml.property  name="type"
+ */
+public Type        getType()                   { return type; }
 
-  public InstructionHandle getStart()                  { return start; }
-  public InstructionHandle getEnd()                    { return end; }
+  /**
+ * @return
+ * @uml.property  name="start"
+ */
+public InstructionHandle getStart()                  { return start; }
+  /**
+ * @return
+ * @uml.property  name="end"
+ */
+public InstructionHandle getEnd()                    { return end; }
 
-  public void setStart(InstructionHandle start) {
+  /**
+ * @param start
+ * @uml.property  name="start"
+ */
+public void setStart(InstructionHandle start) {
     BranchInstruction.notifyTarget(this.start, start, this);
     this.start = start;
   }
 
-  public void setEnd(InstructionHandle end) {
+  /**
+ * @param end
+ * @uml.property  name="end"
+ */
+public void setEnd(InstructionHandle end) {
     BranchInstruction.notifyTarget(this.end, end, this);
     this.end = end;
   }

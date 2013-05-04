@@ -72,8 +72,14 @@ public final class ConstantNameAndType extends Constant {
 	 * 
 	 */
 	private static final long serialVersionUID = 8495842770408309002L;
+/**
+ * @uml.property  name="name_index"
+ */
 private int name_index;      // Name of field/method
-  private int signature_index; // and its signature.
+  /**
+ * @uml.property  name="signature_index"
+ */
+private int signature_index; // and its signature.
 
   /**
    * Initialize from another object.

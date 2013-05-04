@@ -81,15 +81,42 @@ public final class Code extends Attribute {
 	 * 
 	 */
 	private static final long serialVersionUID = 5529796736921057841L;
+/**
+ * @uml.property  name="max_stack"
+ */
 private int             max_stack;   // Maximum size of stack used by this method
-  private int             max_locals;  // Number of local variables
-  private int             code_length; // Length of code in bytes
-  private byte[]          code;        // Actual byte code
+  /**
+ * @uml.property  name="max_locals"
+ */
+private int             max_locals;  // Number of local variables
+  /**
+ * @uml.property  name="code_length"
+ */
+private int             code_length; // Length of code in bytes
+  /**
+ * @uml.property  name="code"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
+private byte[]          code;        // Actual byte code
 
-  private int             exception_table_length;
-  private CodeException[] exception_table;  // Table of handled exceptions
-  private int             attributes_count; // Attributes of code: LineNumber
-  private Attribute[]     attributes;       // or LocalVariable
+  /**
+ * @uml.property  name="exception_table_length"
+ */
+private int             exception_table_length;
+  /**
+ * @uml.property  name="exception_table"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
+private CodeException[] exception_table;  // Table of handled exceptions
+  /**
+ * @uml.property  name="attributes_count"
+ */
+private int             attributes_count; // Attributes of code: LineNumber
+  /**
+ * @uml.property  name="attributes"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
+private Attribute[]     attributes;       // or LocalVariable
 
   /**
    * Initialize from another object. Note that both objects use the same
@@ -207,9 +234,10 @@ private int             max_stack;   // Maximum size of stack used by this metho
   }
 
   /**
-   * @return Collection of code attributes.
-   * @see Attribute
-   */   
+ * @return  Collection of code attributes.
+ * @see  Attribute
+ * @uml.property  name="attributes"
+ */   
   public final Attribute[] getAttributes()         { return attributes; }    
 
   /**
@@ -235,8 +263,9 @@ private int             max_stack;   // Maximum size of stack used by this metho
   }
 
   /**
-   * @return Actual byte code of the method.
-   */  
+ * @return  Actual byte code of the method.
+ * @uml.property  name="code"
+ */  
   public final byte[] getCode()      { return code; }
 
   /**
@@ -282,8 +311,9 @@ private int             max_stack;   // Maximum size of stack used by this metho
   }
 
   /**
-   * @param attributes.
-   */
+ * @param  attributes.
+ * @uml.property  name="attributes"
+ */
   public final void setAttributes(Attribute[] attributes) {
     this.attributes  = attributes;
     attributes_count = (attributes == null)? 0 : attributes.length;
@@ -291,8 +321,9 @@ private int             max_stack;   // Maximum size of stack used by this metho
   }
 
   /**
-   * @param code byte code
-   */
+ * @param code  byte code
+ * @uml.property  name="code"
+ */
   public final void setCode(byte[] code) {
     this.code   = code;
     code_length = (code == null)? 0 : code.length;

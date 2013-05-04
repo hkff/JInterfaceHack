@@ -71,6 +71,10 @@ public class ClassSet implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -1752677780399958157L;
+/**
+ * @uml.property  name="_map"
+ * @uml.associationEnd  qualifier="getClassName:java.lang.String org.apache.bcel.classfile.JavaClass"
+ */
 private HashMap<String, JavaClass> _map = new HashMap<String, JavaClass>();
 
   public boolean add(JavaClass clazz) {

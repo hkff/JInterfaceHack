@@ -10,9 +10,16 @@ import javax.swing.event.*;
  */
 public class VerifierFactoryListModel implements org.apache.bcel.verifier.VerifierFactoryObserver, javax.swing.ListModel{
 
-  private java.util.ArrayList<ListDataListener> listeners = new java.util.ArrayList<ListDataListener>();
+  /**
+ * @uml.property  name="listeners"
+ * @uml.associationEnd  multiplicity="(0 -1)" elementType="javax.swing.event.ListDataListener"
+ */
+private java.util.ArrayList<ListDataListener> listeners = new java.util.ArrayList<ListDataListener>();
 
-  private java.util.TreeSet<String> cache = new java.util.TreeSet<String>();
+  /**
+ * @uml.property  name="cache"
+ */
+private java.util.TreeSet<String> cache = new java.util.TreeSet<String>();
 
   public VerifierFactoryListModel() {
     VerifierFactory.attach(this);

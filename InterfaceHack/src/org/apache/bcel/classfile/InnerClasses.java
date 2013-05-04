@@ -72,8 +72,15 @@ public final class InnerClasses extends Attribute {
 	 * 
 	 */
 	private static final long serialVersionUID = 6021194940257268684L;
+/**
+ * @uml.property  name="inner_classes"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
 private InnerClass[] inner_classes;
-  private int          number_of_classes;
+  /**
+ * @uml.property  name="number_of_classes"
+ */
+private int          number_of_classes;
 
   /**
    * Initialize from another object. Note that both objects use the same

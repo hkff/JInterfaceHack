@@ -95,12 +95,16 @@ public class ExecutionVisitor extends EmptyVisitor implements Visitor{
 
 	/**
 	 * The executionframe we're operating on.
+	 * @uml.property  name="frame"
+	 * @uml.associationEnd  
 	 */
 	private Frame frame = null;
 
 	/**
 	 * The ConstantPoolGen we're working with.
-	 * @see #setConstantPoolGen(ConstantPoolGen)
+	 * @see  #setConstantPoolGen(ConstantPoolGen)
+	 * @uml.property  name="cpg"
+	 * @uml.associationEnd  
 	 */
 	private ConstantPoolGen cpg = null;
 
@@ -133,10 +137,9 @@ public class ExecutionVisitor extends EmptyVisitor implements Visitor{
 	}
 	
 	/**
-	 * The only method granting access to the single instance of
-	 * the ExecutionVisitor class. Before actively using this
-	 * instance, <B>SET THE ConstantPoolGen FIRST</B>.
-	 * @see #setConstantPoolGen(ConstantPoolGen)
+	 * The only method granting access to the single instance of the ExecutionVisitor class. Before actively using this instance, <B>SET THE ConstantPoolGen FIRST</B>.
+	 * @see  #setConstantPoolGen(ConstantPoolGen)
+	 * @uml.property  name="frame"
 	 */
 	public void setFrame(Frame f){
 		this.frame = f;

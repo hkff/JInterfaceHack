@@ -74,12 +74,14 @@ public class Frame{
 	protected static UninitializedObjectType _this;
 
 	/**
-	 *
+	 * @uml.property  name="locals"
+	 * @uml.associationEnd  multiplicity="(1 1)"
 	 */
 	private LocalVariables locals;
 
 	/**
-	 *
+	 * @uml.property  name="stack"
+	 * @uml.associationEnd  multiplicity="(1 1)"
 	 */
 	private OperandStack stack;
 
@@ -115,14 +117,14 @@ public class Frame{
 	}
 
 	/**
-	 *
+	 * @uml.property  name="locals"
 	 */
 	public LocalVariables getLocals(){
 		return locals;
 	}
 
 	/**
-	 *
+	 * @uml.property  name="stack"
 	 */
 	public OperandStack getStack(){
 		return stack;

@@ -70,8 +70,14 @@ public final class LineNumber implements Cloneable, Node, Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 8180863780087168694L;
+/**
+ * @uml.property  name="start_pc"
+ */
 private int start_pc;    // Program Counter (PC) corresponds to line
-  private int line_number; // number in source file
+  /**
+ * @uml.property  name="line_number"
+ */
+private int line_number; // number in source file
 
   /**
    * Initialize from another object.

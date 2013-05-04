@@ -75,8 +75,15 @@ public final class ExceptionTable extends Attribute {
 	 * 
 	 */
 	private static final long serialVersionUID = -3288840628353972449L;
+/**
+ * @uml.property  name="number_of_exceptions"
+ */
 private int   number_of_exceptions;  // Table of indices into
-  private int[] exception_index_table; // constant pool
+  /**
+ * @uml.property  name="exception_index_table"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
+private int[] exception_index_table; // constant pool
 
   /**
    * Initialize from another object. Note that both objects use the same

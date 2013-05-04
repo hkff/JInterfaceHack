@@ -84,10 +84,18 @@ import java.util.ArrayList;
  */
 public abstract class PassVerifier{
 
-	/** The (warning) messages. */
+	/**
+	 * The (warning) messages.
+	 * @uml.property  name="messages"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="java.lang.String"
+	 */
 	private ArrayList<String> messages = new ArrayList<String>(); //Type of elements: String
 	
-	/** The VerificationResult cache. */
+	/**
+	 * The VerificationResult cache.
+	 * @uml.property  name="verificationResult"
+	 * @uml.associationEnd  
+	 */
 	private VerificationResult verificationResult = null;
 
 	/**

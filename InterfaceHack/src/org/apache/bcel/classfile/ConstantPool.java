@@ -75,8 +75,15 @@ public class ConstantPool implements Cloneable, Node, Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -8195040718380684634L;
+/**
+ * @uml.property  name="constant_pool_count"
+ */
 private int        constant_pool_count;
-  private Constant[] constant_pool;
+  /**
+ * @uml.property  name="constant_pool"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
+private Constant[] constant_pool;
 
   /**
    * @param constant_pool Array of constants

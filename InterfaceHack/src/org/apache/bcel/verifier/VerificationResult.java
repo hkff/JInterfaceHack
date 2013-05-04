@@ -90,10 +90,16 @@ public class VerificationResult{
 	/** Canonical VerificationResult for passed verifications. */
 	public static final VerificationResult VR_OK = new VerificationResult(VERIFIED_OK, VERIFIED_OK_MSG);
 
-	/** The numeric status. */
+	/**
+	 * The numeric status.
+	 * @uml.property  name="numeric"
+	 */
 	private int numeric;
 
-	/** The detailed message. */
+	/**
+	 * The detailed message.
+	 * @uml.property  name="detailMessage"
+	 */
 	private String detailMessage;
 
 	/** The usual constructor. */

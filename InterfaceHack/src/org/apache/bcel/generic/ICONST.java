@@ -68,6 +68,9 @@ public class ICONST extends Instruction
 	 * 
 	 */
 	private static final long serialVersionUID = -8584608346858574131L;
+/**
+ * @uml.property  name="value"
+ */
 private int value;
 
   /**

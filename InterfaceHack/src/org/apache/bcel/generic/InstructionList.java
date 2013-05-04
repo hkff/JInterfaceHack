@@ -84,9 +84,24 @@ import java.util.ArrayList;
 public class InstructionList implements Serializable {
 
 	private static final long serialVersionUID = -7679099301896128498L;
-private InstructionHandle start  = null, end = null;
-  private int               length = 0; // number of elements in list
-  private int[]             byte_positions; // byte code offsets corresponding to instructions
+/**
+ * @uml.property  name="start"
+ * @uml.associationEnd  
+ */
+private InstructionHandle start  = null;
+/**
+ * @uml.property  name="end"
+ * @uml.associationEnd  
+ */
+private InstructionHandle end = null;
+  /**
+ * @uml.property  name="length"
+ */
+private int               length = 0; // number of elements in list
+  /**
+ * @uml.property  name="byte_positions" multiplicity="(0 -1)" dimension="1"
+ */
+private int[]             byte_positions; // byte code offsets corresponding to instructions
 
   /**
    * Create (empty) instruction list.
@@ -1163,18 +1178,21 @@ private InstructionHandle start  = null, end = null;
   }
 
   /**
-   * @return start of list
-   */
+ * @return  start of list
+ * @uml.property  name="start"
+ */
   public InstructionHandle getStart() { return start; }
 
   /**
-   * @return end of list
-   */
+ * @return  end of list
+ * @uml.property  name="end"
+ */
   public InstructionHandle getEnd()   { return end; }
 
   /**
-   * @return length of list (Number of instructions, not bytes)
-   */
+ * @return  length of list (Number of instructions, not bytes)
+ * @uml.property  name="length"
+ */
   public int getLength() { return length; }
 
   /**
@@ -1258,7 +1276,11 @@ private InstructionHandle start  = null, end = null;
     }
   }
 
-  private ArrayList<InstructionListObserver> observers;
+  /**
+ * @uml.property  name="observers"
+ * @uml.associationEnd  multiplicity="(0 -1)" elementType="org.apache.bcel.generic.InstructionListObserver"
+ */
+private ArrayList<InstructionListObserver> observers;
 
   /** Add observer for this object.
    */

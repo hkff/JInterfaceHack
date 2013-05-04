@@ -70,45 +70,190 @@ import org.apache.bcel.classfile.*;
  * @see GraphicalVerifier
  */
 public class VerifierAppFrame extends JFrame {
-  JPanel contentPane;
-  JSplitPane jSplitPane1 = new JSplitPane();
-  JPanel jPanel1 = new JPanel();
-  JPanel jPanel2 = new JPanel();
-  JSplitPane jSplitPane2 = new JSplitPane();
-  JPanel jPanel3 = new JPanel();
-  JList classNamesJList = new JList();
-  GridLayout gridLayout1 = new GridLayout();
-  JPanel messagesPanel = new JPanel();
-  GridLayout gridLayout2 = new GridLayout();
-  JMenuBar jMenuBar1 = new JMenuBar();
-  JMenu jMenu1 = new JMenu();
-  JScrollPane jScrollPane1 = new JScrollPane();
-  JScrollPane messagesScrollPane = new JScrollPane();
-  JScrollPane jScrollPane3 = new JScrollPane();
-  GridLayout gridLayout4 = new GridLayout();
-  JScrollPane jScrollPane4 = new JScrollPane();
-  CardLayout cardLayout1 = new CardLayout();
+  /**
+ * @uml.property  name="contentPane"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JPanel contentPane;
+  /**
+ * @uml.property  name="jSplitPane1"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JSplitPane jSplitPane1 = new JSplitPane();
+  /**
+ * @uml.property  name="jPanel1"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JPanel jPanel1 = new JPanel();
+  /**
+ * @uml.property  name="jPanel2"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JPanel jPanel2 = new JPanel();
+  /**
+ * @uml.property  name="jSplitPane2"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JSplitPane jSplitPane2 = new JSplitPane();
+  /**
+ * @uml.property  name="jPanel3"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JPanel jPanel3 = new JPanel();
+  /**
+ * @uml.property  name="classNamesJList"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JList classNamesJList = new JList();
+  /**
+ * @uml.property  name="gridLayout1"
+ */
+GridLayout gridLayout1 = new GridLayout();
+  /**
+ * @uml.property  name="messagesPanel"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JPanel messagesPanel = new JPanel();
+  /**
+ * @uml.property  name="gridLayout2"
+ */
+GridLayout gridLayout2 = new GridLayout();
+  /**
+ * @uml.property  name="jMenuBar1"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JMenuBar jMenuBar1 = new JMenuBar();
+  /**
+ * @uml.property  name="jMenu1"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JMenu jMenu1 = new JMenu();
+  /**
+ * @uml.property  name="jScrollPane1"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JScrollPane jScrollPane1 = new JScrollPane();
+  /**
+ * @uml.property  name="messagesScrollPane"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JScrollPane messagesScrollPane = new JScrollPane();
+  /**
+ * @uml.property  name="jScrollPane3"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JScrollPane jScrollPane3 = new JScrollPane();
+  /**
+ * @uml.property  name="gridLayout4"
+ */
+GridLayout gridLayout4 = new GridLayout();
+  /**
+ * @uml.property  name="jScrollPane4"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JScrollPane jScrollPane4 = new JScrollPane();
+  /**
+ * @uml.property  name="cardLayout1"
+ */
+CardLayout cardLayout1 = new CardLayout();
 
-  private String JUSTICE_VERSION = "JustIce by Enver Haase";
-  private String current_class;
-  GridLayout gridLayout3 = new GridLayout();
-  JTextPane pass1TextPane = new JTextPane();
-  JTextPane pass2TextPane = new JTextPane();
-  JTextPane messagesTextPane = new JTextPane();
-  JMenuItem newFileMenuItem = new JMenuItem();
-  JSplitPane jSplitPane3 = new JSplitPane();
-  JSplitPane jSplitPane4 = new JSplitPane();
-  JScrollPane jScrollPane2 = new JScrollPane();
-  JScrollPane jScrollPane5 = new JScrollPane();
-  JScrollPane jScrollPane6 = new JScrollPane();
-  JScrollPane jScrollPane7 = new JScrollPane();
-  JList pass3aJList = new JList();
-  JList pass3bJList = new JList();
-  JTextPane pass3aTextPane = new JTextPane();
-  JTextPane pass3bTextPane = new JTextPane();
-  JMenu jMenu2 = new JMenu();
-  JMenuItem whatisMenuItem = new JMenuItem();
-  JMenuItem aboutMenuItem = new JMenuItem();
+  /**
+ * @uml.property  name="jUSTICE_VERSION"
+ */
+private String JUSTICE_VERSION = "JustIce by Enver Haase";
+  /**
+ * @uml.property  name="current_class"
+ */
+private String current_class;
+  /**
+ * @uml.property  name="gridLayout3"
+ */
+GridLayout gridLayout3 = new GridLayout();
+  /**
+ * @uml.property  name="pass1TextPane"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JTextPane pass1TextPane = new JTextPane();
+  /**
+ * @uml.property  name="pass2TextPane"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JTextPane pass2TextPane = new JTextPane();
+  /**
+ * @uml.property  name="messagesTextPane"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JTextPane messagesTextPane = new JTextPane();
+  /**
+ * @uml.property  name="newFileMenuItem"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JMenuItem newFileMenuItem = new JMenuItem();
+  /**
+ * @uml.property  name="jSplitPane3"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JSplitPane jSplitPane3 = new JSplitPane();
+  /**
+ * @uml.property  name="jSplitPane4"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JSplitPane jSplitPane4 = new JSplitPane();
+  /**
+ * @uml.property  name="jScrollPane2"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JScrollPane jScrollPane2 = new JScrollPane();
+  /**
+ * @uml.property  name="jScrollPane5"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JScrollPane jScrollPane5 = new JScrollPane();
+  /**
+ * @uml.property  name="jScrollPane6"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JScrollPane jScrollPane6 = new JScrollPane();
+  /**
+ * @uml.property  name="jScrollPane7"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JScrollPane jScrollPane7 = new JScrollPane();
+  /**
+ * @uml.property  name="pass3aJList"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JList pass3aJList = new JList();
+  /**
+ * @uml.property  name="pass3bJList"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JList pass3bJList = new JList();
+  /**
+ * @uml.property  name="pass3aTextPane"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JTextPane pass3aTextPane = new JTextPane();
+  /**
+ * @uml.property  name="pass3bTextPane"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JTextPane pass3bTextPane = new JTextPane();
+  /**
+ * @uml.property  name="jMenu2"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JMenu jMenu2 = new JMenu();
+  /**
+ * @uml.property  name="whatisMenuItem"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JMenuItem whatisMenuItem = new JMenuItem();
+  /**
+ * @uml.property  name="aboutMenuItem"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+JMenuItem aboutMenuItem = new JMenuItem();
 
   /** Constructor. */
   public VerifierAppFrame() {

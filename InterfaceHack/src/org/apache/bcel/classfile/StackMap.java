@@ -64,7 +64,7 @@ import  java.io.*;
  * (J2ME). This attribute is used by the <a
  * href="http://java.sun.com/products/cldc/">KVM</a> and contained
  * within the Code attribute of a method. See CLDC specification
- * §5.3.1.2
+ * ï¿½5.3.1.2
  *
  * @version $Id: StackMap.java,v 1.2 2006/08/22 15:33:21 andos Exp $
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
@@ -77,8 +77,15 @@ public final class StackMap extends Attribute implements Node {
 	 * 
 	 */
 	private static final long serialVersionUID = 7956950501089569110L;
+/**
+ * @uml.property  name="map_length"
+ */
 private int             map_length;
-  private StackMapEntry[] map; // Table of stack map entries
+  /**
+ * @uml.property  name="map"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
+private StackMapEntry[] map; // Table of stack map entries
 
   /*
    * @param name_index Index of name

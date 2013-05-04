@@ -126,10 +126,17 @@ public final class Pass3bVerifier extends PassVerifier{
 	/** In DEBUG mode, the verification algorithm is not randomized. */
 	private static final boolean DEBUG = true;
 
-	/** The Verifier that created this. */
+	/**
+	 * The Verifier that created this.
+	 * @uml.property  name="myOwner"
+	 * @uml.associationEnd  multiplicity="(1 1)"
+	 */
 	private Verifier myOwner;
 
-	/** The method number to verify. */
+	/**
+	 * The method number to verify.
+	 * @uml.property  name="method_no"
+	 */
 	private int method_no;
 
 	/**

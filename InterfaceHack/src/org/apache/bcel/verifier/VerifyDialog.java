@@ -73,27 +73,58 @@ import java.awt.Color;
  * @see #VerifyDialog(String)
  */
 public class VerifyDialog extends javax.swing.JDialog {
-	/** Machine-generated. */
+	/**
+	 * Machine-generated.
+	 * @uml.property  name="ivjJDialogContentPane"
+	 * @uml.associationEnd  
+	 */
 	private javax.swing.JPanel ivjJDialogContentPane = null;
-	/** Machine-generated. */
+	/**
+	 * Machine-generated.
+	 * @uml.property  name="ivjPass1Panel"
+	 * @uml.associationEnd  
+	 */
 	private javax.swing.JPanel ivjPass1Panel = null;
-	/** Machine-generated. */
+	/**
+	 * Machine-generated.
+	 * @uml.property  name="ivjPass2Panel"
+	 * @uml.associationEnd  
+	 */
 	private javax.swing.JPanel ivjPass2Panel = null;
-	/** Machine-generated. */
+	/**
+	 * Machine-generated.
+	 * @uml.property  name="ivjPass3Panel"
+	 * @uml.associationEnd  
+	 */
 	private javax.swing.JPanel ivjPass3Panel = null;
-	/** Machine-generated. */
+	/**
+	 * Machine-generated.
+	 * @uml.property  name="ivjPass1Button"
+	 * @uml.associationEnd  
+	 */
 	private javax.swing.JButton ivjPass1Button = null;
-	/** Machine-generated. */
+	/**
+	 * Machine-generated.
+	 * @uml.property  name="ivjPass2Button"
+	 * @uml.associationEnd  
+	 */
 	private javax.swing.JButton ivjPass2Button = null;
-	/** Machine-generated. */
+	/**
+	 * Machine-generated.
+	 * @uml.property  name="ivjPass3Button"
+	 * @uml.associationEnd  
+	 */
 	private javax.swing.JButton ivjPass3Button = null;
-	/** Machine-generated. */
+	/**
+	 * Machine-generated.
+	 * @uml.property  name="ivjEventHandler"
+	 * @uml.associationEnd  multiplicity="(1 1)" inverse="this$0:org.apache.bcel.verifier.VerifyDialog$IvjEventHandler"
+	 */
 	IvjEventHandler ivjEventHandler = new IvjEventHandler();
 
 	/**
-	 * The class to verify. Default set to 'java.lang.Object'
-	 * in case this class is instantiated via one of the many
-	 * machine-generated constructors.
+	 * The class to verify. Default set to 'java.lang.Object' in case this class is instantiated via one of the many machine-generated constructors.
+	 * @uml.property  name="class_name"
 	 */
 	private String class_name = "java.lang.Object";
 
@@ -117,7 +148,11 @@ class IvjEventHandler implements java.awt.event.ActionListener {
 				connEtoC4(e);
 		};
 	};
-	/** Machine-generated. */
+	/**
+	 * Machine-generated.
+	 * @uml.property  name="ivjFlushButton"
+	 * @uml.associationEnd  
+	 */
 	private javax.swing.JButton ivjFlushButton = null;
 /** Machine-generated. */
 public VerifyDialog() {

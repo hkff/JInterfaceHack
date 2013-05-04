@@ -69,8 +69,14 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
 	 * 
 	 */
 	private static final long serialVersionUID = -3751746568458761719L;
+/**
+ * @uml.property  name="wide"
+ */
 private boolean wide;
-  private int     index; // index to local variable containg the return address
+  /**
+ * @uml.property  name="index"
+ */
+private int     index; // index to local variable containg the return address
 
   /**
    * Empty constructor needed for the Class.newInstance() statement in
@@ -123,13 +129,15 @@ private boolean wide;
   }
 
   /**
-   * @return index of local variable containg the return address
-   */
+ * @return  index of local variable containg the return address
+ * @uml.property  name="index"
+ */
   public final int getIndex() { return index; }
 
   /**
-   * Set index of local variable containg the return address
-   */
+ * Set index of local variable containg the return address
+ * @uml.property  name="index"
+ */
   public final void setIndex(int n) { 
     if(n < 0)
       throw new ClassGenException("Negative index value: " + n);

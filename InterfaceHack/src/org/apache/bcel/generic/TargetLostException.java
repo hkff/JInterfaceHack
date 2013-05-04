@@ -90,6 +90,10 @@ public final class TargetLostException extends Exception {
 	 * 
 	 */
 	private static final long serialVersionUID = -6857272667645328384L;
+/**
+ * @uml.property  name="targets"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
 private InstructionHandle[] targets;
 
   TargetLostException(InstructionHandle[] t, String mesg) {
@@ -98,7 +102,8 @@ private InstructionHandle[] targets;
   }
 
   /**
-   * @return list of instructions still being targeted.
-   */
+ * @return  list of instructions still being targeted.
+ * @uml.property  name="targets"
+ */
   public InstructionHandle[] getTargets() { return targets; }
 }

@@ -72,8 +72,15 @@ public final class LineNumberTable extends Attribute {
 	 * 
 	 */
 	private static final long serialVersionUID = -2679303398988915727L;
+/**
+ * @uml.property  name="line_number_table_length"
+ */
 private int          line_number_table_length;
-  private LineNumber[] line_number_table; // Table of line/numbers pairs
+  /**
+ * @uml.property  name="line_number_table"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
+private LineNumber[] line_number_table; // Table of line/numbers pairs
 
   /*
    * Initialize from another object. Note that both objects use the same

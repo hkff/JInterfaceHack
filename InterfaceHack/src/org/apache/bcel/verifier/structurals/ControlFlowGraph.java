@@ -67,8 +67,7 @@ import java.util.*;
 public class ControlFlowGraph{
 
 	/**
-	 * Objects of this class represent a node in a ControlFlowGraph.
-	 * These nodes are instructions, not basic blocks.
+	 * Objects of this class represent a node in a ControlFlowGraph. These nodes are instructions, not basic blocks.
 	 */
 	private class InstructionContextImpl implements InstructionContext{
 
@@ -83,6 +82,8 @@ public class ControlFlowGraph{
 
 		/**
 		 * The InstructionHandle this InstructionContext is wrapped around.
+		 * @uml.property  name="instruction"
+		 * @uml.associationEnd  
 		 */
 		private InstructionHandle instruction;
 
@@ -285,6 +286,10 @@ public class ControlFlowGraph{
 		/*
 		 * Fulfils the contract of InstructionContext.getInstruction().
 		 */
+		/**
+		 * @return
+		 * @uml.property  name="instruction"
+		 */
 		public InstructionHandle getInstruction(){
 			return instruction;
 		}
@@ -398,13 +403,25 @@ throw new AssertionViolatedException("DID YOU REALLY WANT TO ASK FOR RET'S SUCCS
 	/** The MethofGen object we're working on. */
 	//private final MethodGen method_gen;
 
-	/** The Subroutines object for the method whose control flow is represented by this ControlFlowGraph. */
+	/**
+	 * The Subroutines object for the method whose control flow is represented by this ControlFlowGraph.
+	 * @uml.property  name="subroutines"
+	 * @uml.associationEnd  multiplicity="(1 1)"
+	 */
 	private final Subroutines subroutines;
 
-	/** The ExceptionHandlers object for the method whose control flow is represented by this ControlFlowGraph. */
+	/**
+	 * The ExceptionHandlers object for the method whose control flow is represented by this ControlFlowGraph.
+	 * @uml.property  name="exceptionhandlers"
+	 * @uml.associationEnd  multiplicity="(1 1)"
+	 */
 	private final ExceptionHandlers exceptionhandlers;
 
-	/** All InstructionContext instances of this ControlFlowGraph. */
+	/**
+	 * All InstructionContext instances of this ControlFlowGraph.
+	 * @uml.property  name="instructionContexts"
+	 * @uml.associationEnd  qualifier="i:org.apache.bcel.generic.InstructionHandle org.apache.bcel.verifier.structurals.InstructionContext"
+	 */
 	private Hashtable<InstructionHandle, InstructionContextImpl> instructionContexts = new Hashtable<InstructionHandle, InstructionContextImpl>(); //keys: InstructionHandle, values: InstructionContextImpl
 
 	/** 

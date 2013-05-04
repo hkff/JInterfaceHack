@@ -73,6 +73,9 @@ public class FieldGen extends FieldGenOrMethodGen {
 	 * 
 	 */
 	private static final long serialVersionUID = 6827938423085341455L;
+	/**
+	 * @uml.property  name="value"
+	 */
 	private Object value = null;
 
 	/**
@@ -275,6 +278,10 @@ public class FieldGen extends FieldGenOrMethodGen {
 		return type.getSignature();
 	}
 
+	/**
+	 * @uml.property  name="observers"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="org.apache.bcel.generic.FieldObserver"
+	 */
 	private ArrayList<FieldObserver> observers;
 
 	/**

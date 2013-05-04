@@ -73,12 +73,16 @@ import org.apache.bcel.verifier.exc.Utility;
 public final class Pass1Verifier extends PassVerifier{
 	/**
 	 * DON'T USE THIS EVEN PRIVATELY! USE getJavaClass() INSTEAD.
-	 * @see #getJavaClass()
+	 * @see  #getJavaClass()
+	 * @uml.property  name="jc"
+	 * @uml.associationEnd  
 	 */
 	private JavaClass jc;
 
 	/**
 	 * The Verifier that created this.
+	 * @uml.property  name="myOwner"
+	 * @uml.associationEnd  multiplicity="(1 1)" inverse="p1v:org.apache.bcel.verifier.Verifier"
 	 */
 	private Verifier myOwner;
 

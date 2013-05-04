@@ -62,7 +62,10 @@ package org.apache.bcel.verifier.exc;
  * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
  */
 public final class AssertionViolatedException extends RuntimeException{
-	/** The error message. */
+	/**
+	 * The error message.
+	 * @uml.property  name="detailMessage"
+	 */
 	private String detailMessage;
 	/** Constructs a new AssertionViolatedException with null as its error message string. */
 	public AssertionViolatedException(){

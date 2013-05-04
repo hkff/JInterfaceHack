@@ -75,6 +75,10 @@ public final class Synthetic extends Attribute {
 	 * 
 	 */
 	private static final long serialVersionUID = -807926267344564214L;
+/**
+ * @uml.property  name="bytes"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
 private byte[] bytes;
 
   /**
@@ -142,13 +146,15 @@ private byte[] bytes;
       file.write(bytes, 0, length);
   }    
   /**
-   * @return data bytes.
-   */  
+ * @return  data bytes.
+ * @uml.property  name="bytes"
+ */  
   public final byte[] getBytes() { return bytes; }    
 
   /**
-   * @param bytes.
-   */
+ * @param  bytes.
+ * @uml.property  name="bytes"
+ */
   public final void setBytes(byte[] bytes) {
     this.bytes = bytes;
   }    

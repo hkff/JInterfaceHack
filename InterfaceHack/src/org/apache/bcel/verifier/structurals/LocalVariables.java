@@ -66,7 +66,11 @@ import org.apache.bcel.verifier.exc.*;
  * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
  */
 public class LocalVariables{
-	/** The Type[] containing the local variable slots. */
+	/**
+	 * The Type[] containing the local variable slots.
+	 * @uml.property  name="locals"
+	 * @uml.associationEnd  multiplicity="(0 -1)"
+	 */
 	private Type[] locals;
 
 	/**

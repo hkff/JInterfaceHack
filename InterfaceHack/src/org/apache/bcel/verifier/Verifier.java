@@ -80,16 +80,33 @@ import java.util.Iterator;
 public class Verifier{
 	/**
 	 * The name of the class this verifier operates on.
+	 * @uml.property  name="classname"
 	 */
 	private final String classname;
 
-	/** A Pass1Verifier for this Verifier instance. */
+	/**
+	 * A Pass1Verifier for this Verifier instance.
+	 * @uml.property  name="p1v"
+	 * @uml.associationEnd  multiplicity="(1 1)" inverse="myOwner:org.apache.bcel.verifier.statics.Pass1Verifier"
+	 */
 	private Pass1Verifier p1v;
-	/** A Pass2Verifier for this Verifier instance. */
+	/**
+	 * A Pass2Verifier for this Verifier instance.
+	 * @uml.property  name="p2v"
+	 * @uml.associationEnd  inverse="myOwner:org.apache.bcel.verifier.statics.Pass2Verifier"
+	 */
 	private Pass2Verifier p2v;
-	/** The Pass3aVerifiers for this Verifier instance. Key: Interned string specifying the method number. */
+	/**
+	 * The Pass3aVerifiers for this Verifier instance. Key: Interned string specifying the method number.
+	 * @uml.property  name="p3avs"
+	 * @uml.associationEnd  multiplicity="(0 -1)" ordering="true" elementType="java.lang.String" qualifier="key:java.lang.String org.apache.bcel.verifier.statics.Pass3aVerifier"
+	 */
 	private HashMap<String, Pass3aVerifier> p3avs = new HashMap<String, Pass3aVerifier>();
-	/** The Pass3bVerifiers for this Verifier instance. Key: Interned string specifying the method number. */
+	/**
+	 * The Pass3bVerifiers for this Verifier instance. Key: Interned string specifying the method number.
+	 * @uml.property  name="p3bvs"
+	 * @uml.associationEnd  multiplicity="(0 -1)" ordering="true" elementType="java.lang.String" qualifier="key:java.lang.String org.apache.bcel.verifier.structurals.Pass3bVerifier"
+	 */
 	private HashMap<String, Pass3bVerifier> p3bvs= new HashMap<String, Pass3bVerifier>();
 
 	/** Returns the VerificationResult for the given pass. */

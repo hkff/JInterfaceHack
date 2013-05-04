@@ -73,7 +73,10 @@ import java.lang.reflect.*;
  * @see ClassLoader
  */
 public class JavaWrapper {
-  private java.lang.ClassLoader loader;
+  /**
+ * @uml.property  name="loader"
+ */
+private java.lang.ClassLoader loader;
 
   private static java.lang.ClassLoader getClassLoader() {
     String s = System.getProperty("bcel.classloader");

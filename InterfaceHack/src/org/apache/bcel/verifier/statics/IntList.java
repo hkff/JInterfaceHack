@@ -63,7 +63,11 @@ import java.util.ArrayList;
  * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
  */
 public class IntList{
-	/** The int are stored as Integer objects here. */
+	/**
+	 * The int are stored as Integer objects here.
+	 * @uml.property  name="theList"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="java.lang.Integer"
+	 */
 	private ArrayList<Integer> theList;
 	/** This constructor creates an empty list. */
 	IntList(){

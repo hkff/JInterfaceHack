@@ -68,6 +68,9 @@ public class LCONST extends Instruction
 	 * 
 	 */
 	private static final long serialVersionUID = 101040881636639481L;
+/**
+ * @uml.property  name="value"
+ */
 private long value;
 
   /**

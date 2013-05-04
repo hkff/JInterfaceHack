@@ -82,20 +82,55 @@ public class InstructionHandle implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -7981647100822115798L;
-InstructionHandle next, prev;  // Will be set from the outside
-  Instruction       instruction;
-  protected int     i_position = -1; // byte code offset of instruction
-  private HashSet<InstructionTargeter>   targeters;
-  private HashMap<Object, Object>   attributes;
-
-  public final InstructionHandle getNext()        { return next; }
-  public final InstructionHandle getPrev()        { return prev; }
-  public final Instruction       getInstruction() { return instruction; }
+/**
+ * @uml.property  name="next"
+ * @uml.associationEnd  inverse="prev:org.apache.bcel.generic.InstructionHandle"
+ */
+InstructionHandle next;  // Will be set from the outside
+/**
+ * @uml.property  name="prev"
+ * @uml.associationEnd  inverse="next:org.apache.bcel.generic.InstructionHandle"
+ */
+InstructionHandle prev;
+  /**
+ * @uml.property  name="instruction"
+ * @uml.associationEnd  
+ */
+Instruction       instruction;
+  /**
+ * @uml.property  name="i_position"
+ */
+protected int     i_position = -1; // byte code offset of instruction
+  /**
+ * @uml.property  name="targeters"
+ * @uml.associationEnd  multiplicity="(0 -1)" elementType="org.apache.bcel.generic.InstructionTargeter"
+ */
+private HashSet<InstructionTargeter>   targeters;
+  /**
+ * @uml.property  name="attributes"
+ */
+private HashMap<Object, Object>   attributes;
 
   /**
-   * Replace current instruction contained in this handle.
-   * Old instruction is disposed using Instruction.dispose().
-   */
+ * @return
+ * @uml.property  name="next"
+ */
+public final InstructionHandle getNext()        { return next; }
+  /**
+ * @return
+ * @uml.property  name="prev"
+ */
+public final InstructionHandle getPrev()        { return prev; }
+  /**
+ * @return
+ * @uml.property  name="instruction"
+ */
+public final Instruction       getInstruction() { return instruction; }
+
+  /**
+ * Replace current instruction contained in this handle. Old instruction is disposed using Instruction.dispose().
+ * @uml.property  name="instruction"
+ */
   public void setInstruction(Instruction i) { // Overridden in BranchHandle
     if(i == null)
       throw new ClassGenException("Assigning null to handle");

@@ -68,6 +68,9 @@ import  java.io.*;
  */
 public final class ConstantDouble extends Constant implements ConstantObject {
 	private static final long serialVersionUID = -1579792820433342816L;
+/**
+ * @uml.property  name="bytes"
+ */
 private double bytes;
 
   /** 
@@ -118,12 +121,14 @@ private double bytes;
     file.writeDouble(bytes);
   }    
   /**
-   * @return data, i.e., 8 bytes.
-   */  
+ * @return  data, i.e., 8 bytes.
+ * @uml.property  name="bytes"
+ */  
   public final double getBytes() { return bytes; }    
   /**
-   * @param bytes.
-   */
+ * @param  bytes.
+ * @uml.property  name="bytes"
+ */
   public final void setBytes(double bytes) {
     this.bytes = bytes;
   }    

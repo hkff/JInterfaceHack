@@ -81,29 +81,72 @@ public class MethodGen extends FieldGenOrMethodGen {
 	 */
 	private static final long serialVersionUID = -2671312770633709457L;
 
+	/**
+	 * @uml.property  name="class_name"
+	 */
 	private String class_name;
 
+	/**
+	 * @uml.property  name="arg_types"
+	 * @uml.associationEnd  multiplicity="(0 -1)"
+	 */
 	private Type[] arg_types;
 
+	/**
+	 * @uml.property  name="arg_names" multiplicity="(0 -1)" dimension="1"
+	 */
 	private String[] arg_names;
 
+	/**
+	 * @uml.property  name="max_locals"
+	 */
 	private int max_locals;
 
+	/**
+	 * @uml.property  name="max_stack"
+	 */
 	private int max_stack;
 
+	/**
+	 * @uml.property  name="il"
+	 * @uml.associationEnd  
+	 */
 	private InstructionList il;
 
+	/**
+	 * @uml.property  name="strip_attributes"
+	 */
 	private boolean strip_attributes;
 
 
+	/**
+	 * @uml.property  name="variable_vec"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="org.apache.bcel.generic.LocalVariableGen"
+	 */
 	private ArrayList<LocalVariableGen> variable_vec = new ArrayList<LocalVariableGen>();
 
+	/**
+	 * @uml.property  name="line_number_vec"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="org.apache.bcel.generic.LineNumberGen"
+	 */
 	private ArrayList<LineNumberGen> line_number_vec = new ArrayList<LineNumberGen>();
 
+	/**
+	 * @uml.property  name="exception_vec"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="org.apache.bcel.generic.CodeExceptionGen"
+	 */
 	private ArrayList<CodeExceptionGen> exception_vec = new ArrayList<CodeExceptionGen>();
 
+	/**
+	 * @uml.property  name="throws_vec"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="java.lang.String"
+	 */
 	private ArrayList<String> throws_vec = new ArrayList<String>();
 
+	/**
+	 * @uml.property  name="code_attrs_vec"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="org.apache.bcel.classfile.Attribute"
+	 */
 	private ArrayList<Attribute> code_attrs_vec = new ArrayList<Attribute>();
 
 	/**
@@ -974,7 +1017,14 @@ public class MethodGen extends FieldGenOrMethodGen {
 		strip_attributes = flag;
 	}
 
+	/**
+	 * @author  walid
+	 */
 	static final class BranchTarget {
+		/**
+		 * @uml.property  name="target"
+		 * @uml.associationEnd  
+		 */
 		InstructionHandle target;
 
 		int stackDepth;
@@ -1103,6 +1153,10 @@ public class MethodGen extends FieldGenOrMethodGen {
 		return maxStackDepth;
 	}
 
+	/**
+	 * @uml.property  name="observers"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="org.apache.bcel.generic.MethodObserver"
+	 */
 	private ArrayList<MethodObserver> observers;
 
 	/**

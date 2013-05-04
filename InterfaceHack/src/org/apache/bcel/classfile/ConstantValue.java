@@ -71,6 +71,9 @@ public final class ConstantValue extends Attribute {
 	 * 
 	 */
 	private static final long serialVersionUID = -844584709270299262L;
+/**
+ * @uml.property  name="constantvalue_index"
+ */
 private int constantvalue_index;
 
   /**

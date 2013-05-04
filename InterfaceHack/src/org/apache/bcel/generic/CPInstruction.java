@@ -72,7 +72,10 @@ import org.apache.bcel.classfile.*;
 public abstract class CPInstruction extends Instruction
   implements TypedInstruction, IndexedInstruction
 {
-  protected int index; // index to constant pool
+  /**
+ * @uml.property  name="index"
+ */
+protected int index; // index to constant pool
 
   /**
    * Empty constructor needed for the Class.newInstance() statement in
@@ -136,14 +139,16 @@ public abstract class CPInstruction extends Instruction
   }
 
   /**
-   * @return index in constant pool referred by this instruction.
-   */
+ * @return  index in constant pool referred by this instruction.
+ * @uml.property  name="index"
+ */
   public final int getIndex() { return index; }
 
   /**
-   * Set the index to constant pool.
-   * @param index in  constant pool.
-   */
+ * Set the index to constant pool.
+ * @param index  in  constant pool.
+ * @uml.property  name="index"
+ */
   public void setIndex(int index) { 
     if(index < 0)
       throw new ClassGenException("Negative index value: " + index);

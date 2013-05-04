@@ -59,7 +59,7 @@ import  java.io.*;
 /**
  * This class represents a stack map entry recording the types of
  * local variables and the the of stack items at a given byte code offset.
- * See CLDC specification §5.3.1.2
+ * See CLDC specification ï¿½5.3.1.2
  *
  * @version $Id: StackMapEntry.java,v 1.2 2006/08/22 15:33:21 andos Exp $
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
@@ -67,12 +67,33 @@ import  java.io.*;
  * @see     StackMapType
  */
 public final class StackMapEntry implements Cloneable {
-  private int            byte_code_offset;
-  private int            number_of_locals;
-  private StackMapType[] types_of_locals;
-  private int            number_of_stack_items;
-  private StackMapType[] types_of_stack_items;
-  private ConstantPool   constant_pool;
+  /**
+ * @uml.property  name="byte_code_offset"
+ */
+private int            byte_code_offset;
+  /**
+ * @uml.property  name="number_of_locals"
+ */
+private int            number_of_locals;
+  /**
+ * @uml.property  name="types_of_locals"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
+private StackMapType[] types_of_locals;
+  /**
+ * @uml.property  name="number_of_stack_items"
+ */
+private int            number_of_stack_items;
+  /**
+ * @uml.property  name="types_of_stack_items"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
+private StackMapType[] types_of_stack_items;
+  /**
+ * @uml.property  name="constant_pool"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private ConstantPool   constant_pool;
 
   /**
    * Construct object from file stream.

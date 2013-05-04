@@ -74,18 +74,66 @@ import  java.util.zip.*;
  * @author <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A> 
  */
 public final class ClassParser {
-  private DataInputStream file;
-  private ZipFile         zip;
-  private String          file_name;
-  private int             class_name_index, superclass_name_index;
-  private int             major, minor; // Compiler version
-  private int             access_flags; // Access rights of parsed class
-  private int[]           interfaces; // Names of implemented interfaces
-  private ConstantPool    constant_pool; // collection of constants
-  private Field[]         fields; // class fields, i.e., its variables
-  private Method[]        methods; // methods defined in the class
-  private Attribute[]     attributes; // attributes defined in the class
-  private boolean         is_zip; // Loaded from zip file
+  /**
+ * @uml.property  name="file"
+ */
+private DataInputStream file;
+  /**
+ * @uml.property  name="zip"
+ */
+private ZipFile         zip;
+  /**
+ * @uml.property  name="file_name"
+ */
+private String          file_name;
+  /**
+ * @uml.property  name="class_name_index"
+ */
+private int             class_name_index;
+/**
+ * @uml.property  name="superclass_name_index"
+ */
+private int superclass_name_index;
+  /**
+ * @uml.property  name="major"
+ */
+private int             major; // Compiler version
+/**
+ * @uml.property  name="minor"
+ */
+private int minor;
+  /**
+ * @uml.property  name="access_flags"
+ */
+private int             access_flags; // Access rights of parsed class
+  /**
+ * @uml.property  name="interfaces" multiplicity="(0 -1)" dimension="1"
+ */
+private int[]           interfaces; // Names of implemented interfaces
+  /**
+ * @uml.property  name="constant_pool"
+ * @uml.associationEnd  
+ */
+private ConstantPool    constant_pool; // collection of constants
+  /**
+ * @uml.property  name="fields"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
+private Field[]         fields; // class fields, i.e., its variables
+  /**
+ * @uml.property  name="methods"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
+private Method[]        methods; // methods defined in the class
+  /**
+ * @uml.property  name="attributes"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
+private Attribute[]     attributes; // attributes defined in the class
+  /**
+ * @uml.property  name="is_zip"
+ */
+private boolean         is_zip; // Loaded from zip file
 
   private static final int BUFSIZE = 8192;
 

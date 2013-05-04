@@ -70,6 +70,9 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
 	 * 
 	 */
 	private static final long serialVersionUID = -7439639244808941662L;
+/**
+ * @uml.property  name="dimensions"
+ */
 private short dimensions;
 
   /**
@@ -110,8 +113,9 @@ private short dimensions;
   }
 
   /**
-   * @return number of dimensions to be created
-   */
+ * @return  number of dimensions to be created
+ * @uml.property  name="dimensions"
+ */
   public final short getDimensions() { return dimensions; }
 
   /**

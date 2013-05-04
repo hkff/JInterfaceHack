@@ -81,10 +81,23 @@ import java.util.HashMap;
  * @see     Signature
 */
 public abstract class Attribute implements Cloneable, Node, Serializable {
-  protected int          name_index; // Points to attribute name in constant pool
-  protected int          length;     // Content length of attribute field
-  protected byte         tag;        // Tag to distiguish subclasses
-  protected ConstantPool constant_pool;
+  /**
+ * @uml.property  name="name_index"
+ */
+protected int          name_index; // Points to attribute name in constant pool
+  /**
+ * @uml.property  name="length"
+ */
+protected int          length;     // Content length of attribute field
+  /**
+ * @uml.property  name="tag"
+ */
+protected byte         tag;        // Tag to distiguish subclasses
+  /**
+ * @uml.property  name="constant_pool"
+ * @uml.associationEnd  
+ */
+protected ConstantPool constant_pool;
 
   protected Attribute(byte tag, int name_index, int length,
 		      ConstantPool constant_pool) {
@@ -227,13 +240,15 @@ public abstract class Attribute implements Cloneable, Node, Serializable {
   }    
 
   /**
-   * @return Length of attribute field in bytes.
-   */  
+ * @return  Length of attribute field in bytes.
+ * @uml.property  name="length"
+ */  
   public final int   getLength()    { return length; }    
 
   /**
-   * @param Attribute length in bytes.
-   */
+ * @param Attribute  length in bytes.
+ * @uml.property  name="length"
+ */
   public final void setLength(int length) {
     this.length = length;
   }    
@@ -251,9 +266,9 @@ public abstract class Attribute implements Cloneable, Node, Serializable {
   public final int getNameIndex() { return name_index; }    
 
   /**
-   * @return Tag of attribute, i.e., its type. Value may not be altered, thus
-   * there is no setTag() method.
-   */
+ * @return  Tag of attribute, i.e., its type. Value may not be altered, thus  there is no setTag() method.
+ * @uml.property  name="tag"
+ */
   public final byte  getTag()       { return tag; }    
 
   /**

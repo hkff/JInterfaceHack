@@ -68,6 +68,9 @@ public class FCONST extends Instruction
 	 * 
 	 */
 	private static final long serialVersionUID = 6158569201875020625L;
+/**
+ * @uml.property  name="value"
+ */
 private float value;
 
   /**

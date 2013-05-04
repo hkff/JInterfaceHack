@@ -71,6 +71,9 @@ public final class ConstantString extends Constant implements ConstantObject {
 	 * 
 	 */
 	private static final long serialVersionUID = 5472320814406906117L;
+/**
+ * @uml.property  name="string_index"
+ */
 private int string_index; // Identical to ConstantClass except for this name
 
   /**

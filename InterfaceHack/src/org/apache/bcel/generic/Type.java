@@ -66,8 +66,14 @@ import java.util.ArrayList;
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
 public abstract class Type implements java.io.Serializable {
-  protected byte   type;
-  protected String signature; // signature for the type
+  /**
+ * @uml.property  name="type"
+ */
+protected byte   type;
+  /**
+ * @uml.property  name="signature"
+ */
+protected String signature; // signature for the type
 
   /** Predefined constants
    */
@@ -95,13 +101,15 @@ public abstract class Type implements java.io.Serializable {
   }
 
   /**
-   * @return signature for given type.
-   */
+ * @return  signature for given type.
+ * @uml.property  name="signature"
+ */
   public String getSignature() { return signature; }
 
   /**
-   * @return type as defined in Constants
-   */
+ * @return  type as defined in Constants
+ * @uml.property  name="type"
+ */
   public byte getType() { return type; }
 
   /**

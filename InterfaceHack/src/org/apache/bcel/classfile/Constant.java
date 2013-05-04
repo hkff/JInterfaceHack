@@ -74,7 +74,10 @@ public abstract class Constant implements Cloneable, Node, Serializable {
    * need the tag as an index to select the corresponding class name from the 
    * `CONSTANT_NAMES' array.
    */
-  protected byte tag;
+  /**
+ * @uml.property  name="tag"
+ */
+protected byte tag;
 
   Constant(byte tag) { this.tag = tag; }
 
@@ -90,9 +93,9 @@ public abstract class Constant implements Cloneable, Node, Serializable {
   public abstract void dump(DataOutputStream file) throws IOException;    
 
   /**
-   * @return Tag of constant, i.e., its type. No setTag() method to avoid
-   * confusion.
-   */
+ * @return  Tag of constant, i.e., its type. No setTag() method to avoid  confusion.
+ * @uml.property  name="tag"
+ */
   public final byte getTag() { return tag; }
 
   /**

@@ -63,10 +63,24 @@ package org.apache.bcel.generic;
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
 public final class SWITCH implements CompoundInstruction {
-  private int[]               match;
-  private InstructionHandle[] targets;
-  private Select              instruction;
-  private int                 match_length;
+  /**
+ * @uml.property  name="match" multiplicity="(0 -1)" dimension="1"
+ */
+private int[]               match;
+  /**
+ * @uml.property  name="targets"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
+private InstructionHandle[] targets;
+  /**
+ * @uml.property  name="instruction"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private Select              instruction;
+  /**
+ * @uml.property  name="match_length"
+ */
+private int                 match_length;
 
   /**
    * Template for switch() constructs. If the match array can be

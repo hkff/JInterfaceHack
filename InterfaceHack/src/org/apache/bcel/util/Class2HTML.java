@@ -82,8 +82,15 @@ import org.apache.bcel.Constants;
 */
 public class Class2HTML implements Constants
 {
-  private JavaClass java_class;     // current class object
-  private String    dir;
+  /**
+ * @uml.property  name="java_class"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private JavaClass java_class;     // current class object
+  /**
+ * @uml.property  name="dir"
+ */
+private String    dir;
 
   private static String       class_package;  // name of package, unclean to make it static, but ...
   private static String       class_name;     // name of current class, dito
@@ -141,7 +148,7 @@ public class Class2HTML implements Constants
        */
       for(int i=0; i < argv.length; i++) {
 	if(argv[i].charAt(0) == '-') {  // command line switch
-	  if(argv[i].equals("-d")) {   // Specify target directory, default `.´
+	  if(argv[i].equals("-d")) {   // Specify target directory, default `.ï¿½
 	    dir = argv[++i];
 
 	    if(!dir.endsWith("" + sep))

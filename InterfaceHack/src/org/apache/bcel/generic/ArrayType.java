@@ -66,8 +66,15 @@ public final class ArrayType extends ReferenceType {
 	 * 
 	 */
 	private static final long serialVersionUID = -9167042322318332388L;
+/**
+ * @uml.property  name="dimensions"
+ */
 private int  dimensions;
-  private Type basic_type;
+  /**
+ * @uml.property  name="basic_type"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private Type basic_type;
 
   /**
    * Convenience constructor for array type, e.g. int[]
@@ -140,8 +147,10 @@ private int  dimensions;
       return new ArrayType(basic_type, dimensions - 1);
   }
 
-  /** @return number of dimensions of array
-   */
+  /**
+ * @return  number of dimensions of array
+ * @uml.property  name="dimensions"
+ */
   public int getDimensions() { return dimensions; }
 
   /** @return a hash code value for the object.

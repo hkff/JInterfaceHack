@@ -91,8 +91,16 @@ public class SyntheticRepository implements Repository {
 
   private static HashMap<ClassPath, SyntheticRepository> _instances = new HashMap<ClassPath, SyntheticRepository>(); // CLASSPATH X REPOSITORY
 
-  private ClassPath _path = null;
-  private HashMap<String, JavaClass>   _loadedClasses = new HashMap<String, JavaClass>(); // CLASSNAME X JAVACLASS
+  /**
+ * @uml.property  name="_path"
+ * @uml.associationEnd  
+ */
+private ClassPath _path = null;
+  /**
+ * @uml.property  name="_loadedClasses"
+ * @uml.associationEnd  qualifier="getClassName:java.lang.String org.apache.bcel.classfile.JavaClass"
+ */
+private HashMap<String, JavaClass>   _loadedClasses = new HashMap<String, JavaClass>(); // CLASSNAME X JAVACLASS
 
   private SyntheticRepository(ClassPath path) {
     _path = path;

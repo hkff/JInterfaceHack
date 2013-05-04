@@ -69,6 +69,10 @@ public class ClassVector implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 8672794840848389126L;
+/**
+ * @uml.property  name="vec"
+ * @uml.associationEnd  multiplicity="(0 -1)" elementType="org.apache.bcel.classfile.JavaClass"
+ */
 protected ArrayList<JavaClass> vec = new ArrayList<JavaClass>();
   
   public void      addElement(JavaClass clazz) { vec.add(clazz); }

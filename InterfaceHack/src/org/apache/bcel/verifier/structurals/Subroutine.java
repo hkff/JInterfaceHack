@@ -57,12 +57,9 @@ package org.apache.bcel.verifier.structurals;
 import org.apache.bcel.generic.*;
 
 /**
- * This interface defines properties of JVM bytecode subroutines.
- * Note that it is 'abused' to maintain the top-level code in a
- * consistent fashion, too.
- *
- * @version $Id: Subroutine.java,v 1.1 2005/12/16 14:11:30 andos Exp $
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * This interface defines properties of JVM bytecode subroutines. Note that it is 'abused' to maintain the top-level code in a consistent fashion, too.
+ * @version  $Id: Subroutine.java,v 1.1 2005/12/16 14:11:30 andos Exp $
+ * @author  <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
  */
 public interface Subroutine{
 	/**
@@ -73,11 +70,10 @@ public interface Subroutine{
 	public InstructionHandle[] getEnteringJsrInstructions();
 	
 	/**
-	 * Returns the one and only RET that leaves the subroutine.
-	 * Note that JustIce has a pretty rigid notion of a subroutine.
-	 * <B>Must not be invoked on the 'top-level subroutine'.</B>
-	 *
-	 * @see org.apache.bcel.verifier.structurals.Subroutines
+	 * Returns the one and only RET that leaves the subroutine. Note that JustIce has a pretty rigid notion of a subroutine. <B>Must not be invoked on the 'top-level subroutine'.</B>
+	 * @see  org.apache.bcel.verifier.structurals.Subroutines
+	 * @uml.property  name="leavingRET"
+	 * @uml.associationEnd  
 	 */
 	public InstructionHandle getLeavingRET();
 

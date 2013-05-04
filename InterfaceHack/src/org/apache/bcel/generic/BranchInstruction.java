@@ -67,9 +67,19 @@ import org.apache.bcel.util.ByteSequence;
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A> Modified by Ando Saabas
  */
 public abstract class BranchInstruction extends Instruction implements InstructionTargeter {
-  protected int               index;    // Branch target relative to this instruction
-  protected InstructionHandle target;   // Target object in instruction list
-  protected int               position; // Byte code offset
+  /**
+ * @uml.property  name="index"
+ */
+protected int               index;    // Branch target relative to this instruction
+  /**
+ * @uml.property  name="target"
+ * @uml.associationEnd  
+ */
+protected InstructionHandle target;   // Target object in instruction list
+  /**
+ * @uml.property  name="position"
+ */
+protected int               position; // Byte code offset
 
   /**
    * Empty constructor needed for the Class.newInstance() statement in
@@ -192,19 +202,22 @@ public abstract class BranchInstruction extends Instruction implements Instructi
   }
 
   /**
-   * @return target offset in byte code
-   */
+ * @return  target offset in byte code
+ * @uml.property  name="index"
+ */
   public final int getIndex() { return index; }
 
   /**
-   * @return target of branch instruction
-   */
+ * @return  target of branch instruction
+ * @uml.property  name="target"
+ */
   public InstructionHandle getTarget() { return target; }
 
   /**
-   * Set branch target
-   * @param target branch target
-   */
+ * Set branch target
+ * @param target  branch target
+ * @uml.property  name="target"
+ */
   public void setTarget(InstructionHandle target) {
     notifyTarget(this.target, target, this);
     this.target = target;

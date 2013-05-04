@@ -63,11 +63,28 @@ import java.io.*;
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
 public abstract class FieldOrMethod extends AccessFlags implements Cloneable, Node {
-  protected int          name_index;      // Points to field name in constant pool 
-  protected int          signature_index; // Points to encoded signature
-  protected int          attributes_count;// No. of attributes
-  protected Attribute[]  attributes;      // Collection of attributes
-  protected ConstantPool constant_pool;
+  /**
+ * @uml.property  name="name_index"
+ */
+protected int          name_index;      // Points to field name in constant pool 
+  /**
+ * @uml.property  name="signature_index"
+ */
+protected int          signature_index; // Points to encoded signature
+  /**
+ * @uml.property  name="attributes_count"
+ */
+protected int          attributes_count;// No. of attributes
+  /**
+ * @uml.property  name="attributes"
+ * @uml.associationEnd  multiplicity="(0 -1)"
+ */
+protected Attribute[]  attributes;      // Collection of attributes
+  /**
+ * @uml.property  name="constant_pool"
+ * @uml.associationEnd  
+ */
+protected ConstantPool constant_pool;
 
   FieldOrMethod() {}
   
@@ -134,13 +151,15 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
   }
 
   /**
-   * @return Collection of object attributes.
-   */   
+ * @return  Collection of object attributes.
+ * @uml.property  name="attributes"
+ */   
   public final Attribute[] getAttributes() { return attributes; }
 
   /**
-   * @param attributes Collection of object attributes.
-   */
+ * @param attributes  Collection of object attributes.
+ * @uml.property  name="attributes"
+ */
   public final void setAttributes(Attribute[] attributes) {
     this.attributes  = attributes;
     attributes_count = (attributes == null)? 0 : attributes.length;

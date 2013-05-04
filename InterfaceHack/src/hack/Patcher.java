@@ -6,13 +6,17 @@ package hack;
  * By : Papy Team
  */
 import java.io.IOException;
+import java.util.Hashtable;
+
 import org.apache.bcel.classfile.ClassFormatException;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.Code;
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantMethodref;
 import org.apache.bcel.classfile.ConstantInterfaceMethodref;
+import org.apache.bcel.classfile.ConstantNameAndType;
 import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.classfile.ConstantClass;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.generic.ClassGen;
@@ -26,8 +30,12 @@ import org.apache.bcel.Constants;
 public class Patcher {
 
 	/* ***********************************************************
+	 * Global Vars 
+	 * ************************************************************/
+	private Hashtable<String,String> patchedClasses = new Hashtable<String, String>();
+	
+	/* ***********************************************************
 	 * Utils methods
-	 * 
 	 * ************************************************************/
 	/**
 	 * The declaration of methods in constant pool is : CONSTANT_Methodref[10](class_index = XX, name_and_type_index = XX)
@@ -38,11 +46,26 @@ public class Patcher {
 	 * @param r Constant pool 
 	 * @return
 	 */
-	private boolean patchMethoref(ConstantMethodref r)
+	private boolean patchMethoref(ConstantMethodref r, JavaClass jc)
 	{
-		// We should add type of the class_index, if it's a class that we have parsed and generate interface we can patch methodref
-		// We must not patch it if it's a static or constructor method 
-		return true;
+		boolean result = true;
+		
+		// Name and type constant of method
+		ConstantNameAndType ctt = (ConstantNameAndType) jc.getConstantPool().getConstant(r.getNameAndTypeIndex());
+		
+		// Getting method Class name from constant pool
+		String className = r.getClass(jc.getConstantPool());
+		
+		// Check if the class of the method is patched, if okey then we can patch the methodref
+		if(this.patchedClasses.get(className) == null)
+			result = false;
+		
+		System.out.println(ctt.getName(jc.getConstantPool()));
+		// We must not patch it if it's a constructor method 
+		if(ctt.getName(jc.getConstantPool()).equals("<init>"))
+			result = false;
+		
+		return result;
 	}
 	
 	/**
@@ -105,6 +128,12 @@ public class Patcher {
 		className = javaClass.getClassName();
 		classFileName = javaClass.getFileName();
 	
+		// Break if it's an interface (we won't meta-interface)
+		if(javaClass.isInterface())
+			return;
+		
+		// Registering class in Patcher patchedClasses
+		this.patchedClasses.put(className, classFileName);
 		
 		/***************************************
 		 *  STEP 2 : Generate the interface
@@ -175,17 +204,17 @@ public class Patcher {
 		for(i=0; i<javaClass.getConstantPool().getLength(); i++)
 		{
 			Constant ct = javaClass.getConstantPool().getConstant(i);
-			System.out.println(ct);
-			
+			//System.out.println(ct);
 			
 			// If constant is a methodref
 			if(ct != null && ct.toString().startsWith("CONSTANT_Methodref"))
 			{	
 				// Checking if we should replace this constant
-				if(patchMethoref((ConstantMethodref)ct))
+				if(patchMethoref((ConstantMethodref)ct, javaClass))
 				{
 					// Creating the InterfaceMethodref constant
 					Constant Icons = new ConstantInterfaceMethodref(interfaceIndex,((ConstantMethodref) ct).getNameAndTypeIndex());
+					
 					// replacing the constant Methodref wth InterfaceMethodref
 					javaClass.getConstantPool().setConstant(i, Icons);
 				}
@@ -202,7 +231,8 @@ public class Patcher {
 		}
 		
 		// Dumping Class File
-		javaClass.dump(classFileName);	
+		javaClass.dump(classFileName);
+		
 	}
 	
 	

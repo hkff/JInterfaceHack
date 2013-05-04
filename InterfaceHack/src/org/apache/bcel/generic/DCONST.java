@@ -68,6 +68,9 @@ public class DCONST extends Instruction
 	 * 
 	 */
 	private static final long serialVersionUID = -1215736629035500488L;
+/**
+ * @uml.property  name="value"
+ */
 private double value;
 
   /**

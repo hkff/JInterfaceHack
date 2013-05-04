@@ -70,6 +70,9 @@ public final class Signature extends Attribute {
 	 * 
 	 */
 	private static final long serialVersionUID = -1156534958508386060L;
+/**
+ * @uml.property  name="signature_index"
+ */
 private int signature_index;
 
   /**

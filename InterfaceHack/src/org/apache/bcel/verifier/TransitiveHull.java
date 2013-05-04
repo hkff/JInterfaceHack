@@ -68,7 +68,10 @@ import org.apache.bcel.classfile.JavaClass;
  */
 public class TransitiveHull implements VerifierFactoryObserver{
 
-	/** Used for indentation. */
+	/**
+	 * Used for indentation.
+	 * @uml.property  name="indent"
+	 */
 	private int indent = 0;
 
 	/** Not publicly instantiable. */

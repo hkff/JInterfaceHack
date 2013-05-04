@@ -73,8 +73,15 @@ public class ClassPath implements Serializable {
 
 	public static final ClassPath SYSTEM_CLASS_PATH = new ClassPath();
 
+	/**
+	 * @uml.property  name="paths"
+	 * @uml.associationEnd  multiplicity="(0 -1)"
+	 */
 	private PathEntry[] paths;
 
+	/**
+	 * @uml.property  name="class_path"
+	 */
 	private String class_path;
 
 	/**

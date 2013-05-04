@@ -68,6 +68,10 @@ public class ClassStack implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 6126079269396985982L;
+/**
+ * @uml.property  name="stack"
+ * @uml.associationEnd  multiplicity="(0 -1)" elementType="org.apache.bcel.classfile.JavaClass"
+ */
 private Stack<JavaClass> stack = new Stack<JavaClass>();
 
   public void      push(JavaClass clazz) { stack.push(clazz); }

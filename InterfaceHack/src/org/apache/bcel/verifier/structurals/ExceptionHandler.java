@@ -65,10 +65,18 @@ import org.apache.bcel.generic.*;
  * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
  */
 public class ExceptionHandler{
-	/** The type of the exception to catch. NULL means ANY. */
+	/**
+	 * The type of the exception to catch. NULL means ANY.
+	 * @uml.property  name="catchtype"
+	 * @uml.associationEnd  multiplicity="(1 1)"
+	 */
 	private ObjectType catchtype;
 	
-	/** The InstructionHandle where the handling begins. */
+	/**
+	 * The InstructionHandle where the handling begins.
+	 * @uml.property  name="handlerpc"
+	 * @uml.associationEnd  multiplicity="(1 1)"
+	 */
 	private InstructionHandle handlerpc;
 
 	/** Leave instance creation to JustIce. */

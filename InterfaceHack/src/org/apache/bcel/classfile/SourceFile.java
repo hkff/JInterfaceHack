@@ -72,6 +72,9 @@ public final class SourceFile extends Attribute {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+/**
+ * @uml.property  name="sourcefile_index"
+ */
 private int sourcefile_index;
 
   /**

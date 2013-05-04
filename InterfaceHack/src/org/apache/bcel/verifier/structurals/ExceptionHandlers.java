@@ -68,8 +68,9 @@ import java.util.Hashtable;
  */
 public class ExceptionHandlers{
 	/**
-	 * The ExceptionHandler instances.
-	 * Key: InstructionHandle objects, Values: HashSet<ExceptionHandler> instances.
+	 * The ExceptionHandler instances. Key: InstructionHandle objects, Values: HashSet<ExceptionHandler> instances.
+	 * @uml.property  name="exceptionhandlers"
+	 * @uml.associationEnd  multiplicity="(0 -1)" ordering="true" elementType="org.apache.bcel.verifier.structurals.ExceptionHandler" qualifier="ih:org.apache.bcel.generic.InstructionHandle java.util.HashSet"
 	 */
 	private Hashtable<InstructionHandle, HashSet> exceptionhandlers;
 	 

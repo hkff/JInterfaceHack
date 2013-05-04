@@ -71,6 +71,9 @@ public final class ConstantFloat extends Constant implements ConstantObject {
 	 * 
 	 */
 	private static final long serialVersionUID = -1070087081878407164L;
+/**
+ * @uml.property  name="bytes"
+ */
 private float bytes;
 
   /** 
@@ -120,12 +123,14 @@ private float bytes;
     file.writeFloat(bytes);
   }    
   /**
-   * @return data, i.e., 4 bytes.
-   */  
+ * @return  data, i.e., 4 bytes.
+ * @uml.property  name="bytes"
+ */  
   public final float getBytes() { return bytes; }    
   /**
-   * @param bytes.
-   */
+ * @param  bytes.
+ * @uml.property  name="bytes"
+ */
   public final void setBytes(float bytes) {
     this.bytes = bytes;
   }

@@ -71,6 +71,9 @@ public final class ConstantLong extends Constant implements ConstantObject {
 	 * 
 	 */
 	private static final long serialVersionUID = 2809002607743677276L;
+/**
+ * @uml.property  name="bytes"
+ */
 private long bytes;
 
   /** 
@@ -119,12 +122,14 @@ private long bytes;
     file.writeLong(bytes);
   }    
   /**
-   * @return data, i.e., 8 bytes.
-   */  
+ * @return  data, i.e., 8 bytes.
+ * @uml.property  name="bytes"
+ */  
   public final long getBytes() { return bytes; }    
   /**
-   * @param bytes.
-   */
+ * @param  bytes.
+ * @uml.property  name="bytes"
+ */
   public final void setBytes(long bytes) {
     this.bytes = bytes;
   }    

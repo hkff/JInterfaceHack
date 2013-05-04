@@ -65,11 +65,28 @@ import java.io.*;
  * 
  */
 final class AttributeHTML implements org.apache.bcel.Constants {
-  private String       class_name;     // name of current class
-  private PrintWriter  file;					// file to write to
-  private int	       attr_count = 0;
-  private ConstantHTML constant_html;
-  private ConstantPool constant_pool;
+  /**
+ * @uml.property  name="class_name"
+ */
+private String       class_name;     // name of current class
+  /**
+ * @uml.property  name="file"
+ */
+private PrintWriter  file;					// file to write to
+  /**
+ * @uml.property  name="attr_count"
+ */
+private int	       attr_count = 0;
+  /**
+ * @uml.property  name="constant_html"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private ConstantHTML constant_html;
+  /**
+ * @uml.property  name="constant_pool"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private ConstantPool constant_pool;
 
   AttributeHTML(String dir, String class_name, ConstantPool constant_pool,
 		ConstantHTML constant_html) throws IOException

@@ -67,8 +67,14 @@ public class IINC extends LocalVariableInstruction {
 	 * 
 	 */
 	private static final long serialVersionUID = -8938364416647466869L;
+/**
+ * @uml.property  name="wide"
+ */
 private boolean wide;
-  private int     c;
+  /**
+ * @uml.property  name="c"
+ */
+private int     c;
 
   /**
    * Empty constructor needed for the Class.newInstance() statement in

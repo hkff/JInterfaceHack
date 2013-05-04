@@ -65,10 +65,24 @@ import java.io.*;
  * 
  */
 final class MethodHTML implements org.apache.bcel.Constants {
-  private String 	class_name;     // name of current class
-  private PrintWriter	file;	        // file to write to
-  private ConstantHTML  constant_html;
-  private AttributeHTML attribute_html;
+  /**
+ * @uml.property  name="class_name"
+ */
+private String 	class_name;     // name of current class
+  /**
+ * @uml.property  name="file"
+ */
+private PrintWriter	file;	        // file to write to
+  /**
+ * @uml.property  name="constant_html"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private ConstantHTML  constant_html;
+  /**
+ * @uml.property  name="attribute_html"
+ * @uml.associationEnd  multiplicity="(1 1)"
+ */
+private AttributeHTML attribute_html;
 
   MethodHTML(String dir, String class_name,
 	     Method[] methods, Field[] fields,

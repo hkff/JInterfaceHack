@@ -66,8 +66,14 @@ import org.apache.bcel.util.ByteSequence;
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
 public abstract class Instruction implements Cloneable, Serializable {
-  protected short length = 1;  // Length of instruction in bytes 
-  protected short opcode = -1; // Opcode number
+  /**
+ * @uml.property  name="length"
+ */
+protected short length = 1;  // Length of instruction in bytes 
+  /**
+ * @uml.property  name="opcode"
+ */
+protected short opcode = -1; // Opcode number
 
   private static InstructionComparator cmp = InstructionComparator.DEFAULT;
 
@@ -255,8 +261,9 @@ public abstract class Instruction implements Cloneable, Serializable {
   }
 
   /**
-   * @return this instructions opcode
-   */
+ * @return  this instructions opcode
+ * @uml.property  name="opcode"
+ */
   public short getOpcode()    { return opcode; }
 
   /**
@@ -265,8 +272,9 @@ public abstract class Instruction implements Cloneable, Serializable {
   public int getLength()   { return length; }
 
   /**
-   * Needed in readInstruction.
-   */
+ * Needed in readInstruction.
+ * @uml.property  name="opcode"
+ */
   private void setOpcode(short opcode) { this.opcode = opcode; }
 
   /** Some instructions may be reused, so don't do anything by default.

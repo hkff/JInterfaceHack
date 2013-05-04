@@ -67,7 +67,11 @@ import org.apache.bcel.generic.*;
  */
 public class UninitializedObjectType extends ReferenceType implements Constants{
 
-	/** The "initialized" version. */
+	/**
+	 * The "initialized" version.
+	 * @uml.property  name="initialized"
+	 * @uml.associationEnd  multiplicity="(1 1)"
+	 */
 	private ObjectType initialized;
 	
 	/** Creates a new instance. */
@@ -77,8 +81,8 @@ public class UninitializedObjectType extends ReferenceType implements Constants{
 	}
 
 	/**
-	 * Returns the ObjectType of the same class as the one of the uninitialized object
-	 * represented by this UninitializedObjectType instance.
+	 * Returns the ObjectType of the same class as the one of the uninitialized object represented by this UninitializedObjectType instance.
+	 * @uml.property  name="initialized"
 	 */
 	public ObjectType getInitialized(){
 		return initialized;
