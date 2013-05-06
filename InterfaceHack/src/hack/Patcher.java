@@ -264,22 +264,17 @@ public class Patcher {
 			// Search invokevirtual in the instructions of the method
 			for(k=0;k<ins.length; k++)
 			{
-				System.out.println(ins[k].toString(javaClass.getConstantPool()));
 				// If we find an invokevirtual
 				if(ins[k].toString().startsWith("invokevirtual"))
 				{
 					// Spliting instruction to get class index and arguments number of the invokevirtual
 					String[] insPart = ins[k].toString().split(" ");
-					String[] insPart2 = ins[k].toString(javaClass.getConstantPool()).split(" ");
-					
-					for(l=0;l<insPart2.length;l++)
-							System.out.println(insPart2[l]);
 					
 					// Check if we should patch the invokevirtual
 					if(patchInvokevirtual(Integer.parseInt(insPart[1]), javaClass.getConstantPool()))
 					{
-						// Patch the invoke
-						ins[k] = new INVOKEINTERFACE(Integer.parseInt(insPart[1]),2);
+						// Patch the invoke : INVOKEINTERFACE( class Index, the number of arguments for stack (+1 for this))
+						ins[k] = new INVOKEINTERFACE(Integer.parseInt(insPart[1]),methods[i].getArgumentTypes().length + 1);
 					}
 				}
 				// Add instruction to the new instruction List
