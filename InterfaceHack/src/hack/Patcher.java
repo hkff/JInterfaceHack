@@ -41,6 +41,7 @@ public class Patcher {
 	 * Global Vars 
 	 * ************************************************************/
 	private Hashtable<String,String> patchedClasses = new Hashtable<String, String>();
+	private Hashtable<String,Boolean> redefinedMethods = new Hashtable<String,Boolean>();
 	private boolean debug = true;
 	
 	/* ***********************************************************
@@ -55,7 +56,7 @@ public class Patcher {
 	 * @param r Constant pool 
 	 * @return
 	 */
-	private boolean patchMethoref(ConstantMethodref r, JavaClass jc)
+	private boolean patchMethodref(ConstantMethodref r, JavaClass jc)
 	{
 		boolean result = true;
 		
@@ -72,6 +73,10 @@ public class Patcher {
 		System.out.println(ctt.getName(jc.getConstantPool()));
 		// We must not patch it if it's a constructor method 
 		if(ctt.getName(jc.getConstantPool()).equals("<init>"))
+			result = false;
+			
+		// Not patch redefined method
+		if (this.redefinedMethods.get(ctt.getName(jc.getConstantPool())) != null)
 			result = false;
 		
 		return result;
@@ -120,6 +125,7 @@ public class Patcher {
 					&& m.getName().equals(superMethods[j].getName()))
 				{					
 					redefined = true;
+					this.redefinedMethods.put(m.getName(),true);
 				}
 				j++;
 			}
@@ -142,7 +148,6 @@ public class Patcher {
 	 */
 	public void patchClass(String classFile) throws ClassFormatException, IOException
 	{
-	
 		/***************************************
 		 *  Vars
 		 **************************************/
@@ -159,6 +164,9 @@ public class Patcher {
 		
 		// Others
 		int i = 0;
+		
+		// Inits
+		this.redefinedMethods = new Hashtable<String,Boolean>();
 
 		
 		/***************************************
@@ -286,7 +294,7 @@ public class Patcher {
 				String mtRefClassName = ((ConstantMethodref)ct).getClass(javaClass.getConstantPool());
 				
 				// Checking if we should replace this constant
-				if(patchMethoref((ConstantMethodref)ct, javaClass))
+				if(patchMethodref((ConstantMethodref)ct, javaClass))
 				{
 					// Add interface to constantpool
 					cpg.addClass("I"+mtRefClassName);
