@@ -3,7 +3,6 @@ package hack;
 /**
  * A patcher of class files
  * Created 04/05/2013
- * By : Papy Team
  */
 import java.io.IOException;
 import java.util.Hashtable;
