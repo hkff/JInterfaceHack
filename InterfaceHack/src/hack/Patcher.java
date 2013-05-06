@@ -103,7 +103,7 @@ public class Patcher {
 	 * @return
 	 */
 	private boolean patchMethod(JavaClass c, Method m)
-	{
+	{		
 		boolean redefined = false;
 		// Get all super classes in ascending order (java.lang.Object is last)
 		JavaClass[] superClasses = c.getSuperClasses();
@@ -111,19 +111,22 @@ public class Patcher {
 		
 		// While there is super class and method not redefined
 		while (i<superClasses.length && !redefined)
-		{
+		{	
 			Method[] superMethods = superClasses[i].getMethods();
 			int j=0;
 			while (j<superMethods.length && !redefined)
-			{
-				if (superMethods[j].equals(m))
+			{				
+				if (m.getSignature().equals(superMethods[j].getSignature())
+					&& m.getName().equals(superMethods[j].getName()))
+				{					
 					redefined = true;
+				}
 				j++;
 			}
 			i++;
 		}
-	
-		return (!redefined & !m.isStatic() & !m.isAbstract() );
+			
+		return (!redefined && !m.isStatic() && !m.isAbstract() );
 	}
 	
 	
