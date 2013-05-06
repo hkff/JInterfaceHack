@@ -8,23 +8,31 @@ package hack;
 import java.io.IOException;
 import java.util.Hashtable;
 
+import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.ClassFormatException;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.Code;
+import org.apache.bcel.classfile.CodeException;
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantMethodref;
 import org.apache.bcel.classfile.ConstantInterfaceMethodref;
 import org.apache.bcel.classfile.ConstantNameAndType;
 import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.ConstantClass;
+import org.apache.bcel.classfile.ConstantUtf8;
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.LineNumberTable;
+import org.apache.bcel.classfile.LocalVariableTable;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.INVOKEINTERFACE;
+import org.apache.bcel.generic.Instruction;
+import org.apache.bcel.generic.InstructionFactory;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.Constants;
-
+import org.apache.bcel.generic.InstructionList;
 
 
 public class Patcher {
@@ -70,12 +78,20 @@ public class Patcher {
 	
 	/**
 	 * Check if we should patch call site or not
-	 * TODO Check class of invoked method (same as Methodref)
+	 * Check class of invoked method (same as Methodref)
 	 * @return
 	 */
-	private boolean patchInvokvirtual()
+	private boolean patchInvokevirtual(int methodRefIndex, ConstantPool cp)
 	{
-		return true;
+		try {
+			// To check if the class of the method is patched or not,
+			// if the methodref of this invokevirtual is now an InterfaceMethodref that mean that we have patched the class
+			// so we can patch the invokevirtual, else if it's a methodref the cast raise an exception and we return false
+			ConstantInterfaceMethodref ctr =  (ConstantInterfaceMethodref) cp.getConstant(methodRefIndex);
+			return true;	
+		} catch (Exception e) {
+			return false;
+		}	
 	}
 	
 	/**
@@ -135,6 +151,7 @@ public class Patcher {
 		// Registering class in Patcher patchedClasses
 		this.patchedClasses.put(className, classFileName);
 		
+		
 		/***************************************
 		 *  STEP 2 : Generate the interface
 		 **************************************/
@@ -182,7 +199,9 @@ public class Patcher {
 		/***************************************
 		 *  STEP 3 : Patching class
 		 **************************************/
+		//***************************
 		// Adding interface to class
+		//***************************
 		ConstantPool constants = javaClass.getConstantPool();
 		ConstantPoolGen cpg = new ConstantPoolGen(constants);
 		int ref = cpg.addClass(IclassName);
@@ -198,7 +217,9 @@ public class Patcher {
 		javaClass.setInterfaces(newInterfaces);
 		
 		
+		//*********************
 		 // Patching Methodref
+		//*********************
 		int interfaceIndex = javaClass.getInterfaceIndices()[newInterfaces.length-1];
 		
 		for(i=0; i<javaClass.getConstantPool().getLength(); i++)
@@ -221,14 +242,62 @@ public class Patcher {
 			}
 		}
 		
-		
-		// Patching call sites (Replacing invokvirtual by invokinterface)
+		//*********************************************************************
+		// Patching call sites (Replacing invokevirtual by invokeinterface)
 		// Searching in code of all methods
+		//*********************************************************************
+		int k,l;
 		for(i=0; i<methods.length; i++)
 		{
-			Code methodCode = methods[i].getCode();
-			// TODO : find invokvirtual in code
+			System.out.println("Mthod : "+methods[i].getName()+"******");
+			
+			// Getting constantpool and method generator (we create a method generator based on our method and use it to get instructions)
+			ConstantPoolGen cpgm = new ConstantPoolGen(javaClass.getConstantPool());
+			MethodGen mth = new MethodGen(methods[i], javaClass.getClassName(),cpgm);
+			
+			// Getting all instructions in the method
+			Instruction[] ins =  mth.getInstructionList().getInstructions();
+			
+			// The new patched method's instructions List
+			InstructionList il = new InstructionList();
+			
+			// Search invokevirtual in the instructions of the method
+			for(k=0;k<ins.length; k++)
+			{
+				System.out.println(ins[k].toString(javaClass.getConstantPool()));
+				// If we find an invokevirtual
+				if(ins[k].toString().startsWith("invokevirtual"))
+				{
+					// Spliting instruction to get class index and arguments number of the invokevirtual
+					String[] insPart = ins[k].toString().split(" ");
+					String[] insPart2 = ins[k].toString(javaClass.getConstantPool()).split(" ");
+					
+					for(l=0;l<insPart2.length;l++)
+							System.out.println(insPart2[l]);
+					
+					// Check if we should patch the invokevirtual
+					if(patchInvokevirtual(Integer.parseInt(insPart[1]), javaClass.getConstantPool()))
+					{
+						// Patch the invoke
+						ins[k] = new INVOKEINTERFACE(Integer.parseInt(insPart[1]),2);
+					}
+				}
+				// Add instruction to the new instruction List
+				il.append(ins[k]);
+			}
+			
+			// Patch the method instructionsList
+			mth.setInstructionList(il);
+			mth.setMaxStack();
+			
+			// Generate the new method without changing constantpool
+			methods[i] = mth.getMethodNoChangeCTP(methods[i].getNameIndex(), methods[i].getSignatureIndex(),
+					methods[i].getAttributes()[0].getNameIndex());
 		}
+		
+		
+		// Patch class methods
+		javaClass.setMethods(methods);
 		
 		// Dumping Class File
 		javaClass.dump(classFileName);

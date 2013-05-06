@@ -850,7 +850,103 @@ public class MethodGen extends FieldGenOrMethodGen {
 
 		return m;
 	}
+	/**
+	 * This is not an original method of bcel 
+	 * Get method object without modifying constantpool. Never forget to call setMaxStack() or
+	 * setMaxStack(max), respectively, before calling this method (the same
+	 * applies for max locals).
+	 * 
+	 * @return method object
+	 */
+	public Method getMethodNoChangeCTP(int name_index, int signature_index, int codeNameIndex) {
+		String signature;
+		if (descriptor == null) {
+			signature = getSignature();
+		}else {
+			signature = descriptor;
+		}
+		//int name_index = cp.addUtf8(name);
+		//int signature_index = cp.addUtf8(signature);
 
+		/*
+		 * Also updates positions of instructions, i.e., their indices
+		 */
+		byte[] byte_code = null;
+
+		if (il != null)
+			byte_code = il.getByteCode();
+
+		LineNumberTable lnt = null;
+		LocalVariableTable lvt = null;
+
+		/*
+		 * Create LocalVariableTable and LineNumberTable attributes (for
+		 * debuggers, e.g.)
+		 */
+		/*if ((variable_vec.size() > 0) && !strip_attributes)
+			addCodeAttribute(lvt = getLocalVariableTable(cp));
+
+		if ((line_number_vec.size() > 0) && !strip_attributes)
+			addCodeAttribute(lnt = getLineNumberTable(cp));*/
+
+		Attribute[] code_attrs = getCodeAttributes();
+
+		/*
+		 * Each attribute causes 6 additional header bytes
+		 */
+		int attrs_len = 0;
+		for (int i = 0; i < code_attrs.length; i++)
+			attrs_len += (code_attrs[i].getLength() + 6);
+
+		CodeException[] c_exc = getCodeExceptions();
+		int exc_len = c_exc.length * 8; // Every entry takes 8 bytes
+
+		Code code = null;
+
+		if ((il != null) && !isAbstract()) {
+			// Remove any stale code attribute
+			Attribute[] attributes = getAttributes();
+			for (int i = 0; i < attributes.length; i++) {
+				Attribute a = attributes[i];
+
+				if (a instanceof Code)
+					removeAttribute(a);
+			}
+
+			code = new Code(codeNameIndex, 8 + byte_code.length + // prologue
+																		// byte
+																		// code
+					2 + exc_len + // exceptions
+					2 + attrs_len, // attributes
+					max_stack, max_locals, byte_code, c_exc, code_attrs, cp
+							.getConstantPool());
+
+			addAttribute(code);
+		}
+
+		ExceptionTable et = null;
+
+		if (throws_vec.size() > 0)
+			addAttribute(et = getExceptionTable(cp)); // Add `Exceptions' if
+														// there are
+		// "throws" clauses
+
+		Method m = new Method(access_flags, name_index, signature_index,
+				getAttributes(), cp.getConstantPool());
+
+		// Undo effects of adding attributes
+		if (lvt != null)
+			removeCodeAttribute(lvt);
+		if (lnt != null)
+			removeCodeAttribute(lnt);
+		if (code != null)
+			removeAttribute(code);
+		if (et != null)
+			removeAttribute(et);
+
+		return m;
+	}
+	
 	/**
 	 * Remove all NOPs from the instruction list (if possible) and update every
 	 * object refering to them, i.e., branch instructions, local variables and
