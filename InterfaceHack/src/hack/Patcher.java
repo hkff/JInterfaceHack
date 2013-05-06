@@ -32,7 +32,6 @@ import org.apache.bcel.generic.InstructionFactory;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.Constants;
-import org.apache.bcel.generic.InstructionList;
 
 
 public class Patcher {
@@ -357,14 +356,8 @@ public class Patcher {
 	 */
 	public static void main(String args[]) throws ClassNotFoundException, ClassFormatException, IOException
 	{
-		Patcher p = new Patcher();
-		p.patchClass("hack/A.class");
-		p.patchClass("hack/B.class");
-		p.patchClass("hack/Main.class");
+		CustomLoader loader = new CustomLoader();
 		
-		for(int i=0; i<=99;i++)
-			p.patchClass("classe"+i+".class");
-		
-		p.patchClass("Main.class");
+		loader.loadClass("hack/A");
 	}
 }
