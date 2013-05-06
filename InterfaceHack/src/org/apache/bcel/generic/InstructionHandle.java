@@ -164,6 +164,8 @@ public final Instruction       getInstruction() { return instruction; }
   /** Factory method.
    */
   static final InstructionHandle getInstructionHandle(Instruction i) {
+	//  System.out.println("InstructionHandle.java -> getInstructionHandle : " + i.toString(true));/****************** debug */
+	  
     if(ih_list == null)
       return new InstructionHandle(i);
     else {

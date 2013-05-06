@@ -343,6 +343,7 @@ private int[]             byte_positions; // byte code offsets corresponding to 
    * @param ih instruction to append
    */
   private void append(InstructionHandle ih) {
+	 // System.out.println("InstructionList.java -> append(ih) : " + ih);/****************** debug */
     if(isEmpty()) {
       start = end = ih;
       ih.next = ih.prev = null;
@@ -364,6 +365,7 @@ private int[]             byte_positions; // byte code offsets corresponding to 
    * @return instruction handle of the appended instruction
    */
   public InstructionHandle append(Instruction i) {
+	 // System.out.println("InstructionList.java -> append(i) : " + i.toString(true));/****************** debug */
     InstructionHandle ih = InstructionHandle.getInstructionHandle(i);
     append(ih);
 
