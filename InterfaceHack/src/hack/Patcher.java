@@ -125,6 +125,7 @@ public class Patcher {
 		// Class vars
 		String className = "";
 		String classFileName = "";
+		String classSuperClassName = "";
 		
 		// Interface vars
 		String IclassName = "";
@@ -143,7 +144,8 @@ public class Patcher {
 		// update vars
 		className = javaClass.getClassName();
 		classFileName = javaClass.getFileName();
-	
+		classSuperClassName = javaClass.getSuperclassName();
+		
 		// Break if it's an interface (we won't meta-interface)
 		if(javaClass.isInterface())
 			return;
@@ -157,14 +159,19 @@ public class Patcher {
 		 **************************************/
 		// Initializing interface vars, name of interface is the name of the class prefixed by 'I'
 		IclassName = "I"+className;
-		IsuperClassName = javaClass.getSuperclassName();
 		IclassFileName = classFileName.replace(className+".class" , "I"+className+".class");
-		// TODO Handle super class
 		
-		// Creating the interface
-		ClassGen ic = new ClassGen(IclassName, IsuperClassName,IclassFileName, Constants.ACC_PUBLIC | Constants.ACC_INTERFACE | Constants.ACC_ABSTRACT ,null);
+		// Creating the interface (an interface has always Object as superClass)
+		ClassGen ic = new ClassGen(IclassName, "java/lang/Object",IclassFileName, Constants.ACC_PUBLIC | Constants.ACC_INTERFACE | Constants.ACC_ABSTRACT ,null);
 		ConstantPoolGen icp = ic.getConstantPool();
-	
+
+		// If the super class was already patched, we extends the interface with the superClass interface (by adding it as an interface)
+		if(patchedClasses.get(classSuperClassName) != null)
+		{
+			IsuperClassName = "I"+classSuperClassName;
+			ic.addInterface(IsuperClassName);
+		}
+				
 		// Generating methods
 		Method[] methods = javaClass.getMethods();
 		
@@ -311,5 +318,6 @@ public class Patcher {
 	{
 		Patcher p = new Patcher();
 		p.patchClass("hack/A.class");
+		p.patchClass("hack/B.class");
 	}
 }
