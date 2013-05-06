@@ -102,8 +102,26 @@ public class Patcher {
 	 * @param m
 	 * @return
 	 */
-	private boolean patchMethod(Method m){
-		return ( !m.isStatic() & !m.isAbstract() );
+	private boolean patchMethod(JavaClass c, Method m)
+	{
+		boolean redefined = false;
+		JavaClass superClass = c.getSuperClass();
+		
+		// While there is super class
+		while (superClass != null && !redefined)
+		{
+			// Get all methods
+			Method[] superMethods = superClass.getMethods();
+			int i=0;
+			// For each method, compare with m
+			while (i<superMethods.length && !redefined)
+				if (superMethods[i].equals(m))
+					redefined = true;
+			
+			superClass = superClass.getSuperClass();
+		}
+	
+		return (!redefined & !m.isStatic() & !m.isAbstract() );
 	}
 	
 	
@@ -190,7 +208,7 @@ public class Patcher {
 		for(i=0; i<methods.length; i++)
 		{
 			// Check if we should patch the method or not
-			if(patchMethod(methods[i]))
+			if(patchMethod(javaClass,methods[i]))
 			{
 				// Creating method
 				MethodGen methodGen = new MethodGen(methods[i].getAccessFlags() | Constants.ACC_ABSTRACT, methods[i].getName(),
@@ -345,8 +363,7 @@ public class Patcher {
 		javaClass.dump(classFileName);
 		
 		if(debug)System.out.println("Class "+className+" patched successfully !");
-	}
-	
+	}	
 	
 	/**
 	 * Main
@@ -355,16 +372,17 @@ public class Patcher {
 	 * @throws ClassFormatException
 	 * @throws IOException
 	 */
-	public static void main(String args[]) throws ClassNotFoundException, ClassFormatException, IOException
+	public static void main(String args[])
+		throws ClassNotFoundException, ClassFormatException, IOException
 	{
 		Patcher p = new Patcher();
 		p.patchClass("hack/A.class");
 		p.patchClass("hack/B.class");
-		p.patchClass("hack/Main.class");
+		//p.patchClass("hack/Main.class");
 		
-		for(int i=0; i<=99;i++)
-			p.patchClass("classe"+i+".class");
+		//for(int i=0; i<=99;i++)
+		//	p.patchClass("classe"+i+".class");
 		
-		p.patchClass("Main.class");
+		//p.patchClass("Main.class");
 	}
 }
