@@ -200,8 +200,22 @@ public class Patcher {
 				return;
 		
 		// Initializing interface vars, name of interface is the name of the class prefixed by 'I'
-		IclassName = "I"+className;
-		IclassFileName = classFileName.replace(className+".class" , "I"+className+".class");
+		/******* TODO *******/
+		// patch correct name for package
+		int index = className.lastIndexOf(".");
+		if(index != -1)
+		{
+			String name = className.substring(index+1);
+			IclassName = className.substring(0, index+1)+"I"+name;
+			IclassFileName = classFileName.replace(name+".class" , "I"+name+".class");
+		}
+		else
+		{
+			IclassName = "I"+className;
+			IclassFileName = classFileName.replace(className+".class" , "I"+className+".class");	
+		}
+		//System.out.println("0000000000000000000 "+IclassName+" "+IclassFileName);
+		/*******************************/
 		
 		// Creating the interface (an interface has always Object as superClass)
 		ClassGen ic = new ClassGen(IclassName, "java/lang/Object",IclassFileName, Constants.ACC_PUBLIC | Constants.ACC_INTERFACE | Constants.ACC_ABSTRACT ,null);
@@ -396,5 +410,7 @@ public class Patcher {
 		//	p.patchClass("classe"+i+".class");
 		
 		//p.patchClass("Main.class");
+		for(int i=0; i<=args.length;i++)
+			p.patchClass(args[i]);
 	}
 }
