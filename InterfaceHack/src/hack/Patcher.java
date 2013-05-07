@@ -3,32 +3,23 @@ package hack;
 /**
  * A patcher of class files
  * Created 04/05/2013
- * By : Papy Team
  */
 import java.io.IOException;
 import java.util.Hashtable;
 
-import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.ClassFormatException;
 import org.apache.bcel.classfile.ClassParser;
-import org.apache.bcel.classfile.Code;
-import org.apache.bcel.classfile.CodeException;
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantMethodref;
 import org.apache.bcel.classfile.ConstantInterfaceMethodref;
 import org.apache.bcel.classfile.ConstantNameAndType;
 import org.apache.bcel.classfile.ConstantPool;
-import org.apache.bcel.classfile.ConstantClass;
-import org.apache.bcel.classfile.ConstantUtf8;
 import org.apache.bcel.classfile.JavaClass;
-import org.apache.bcel.classfile.LineNumberTable;
-import org.apache.bcel.classfile.LocalVariableTable;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.INVOKEINTERFACE;
 import org.apache.bcel.generic.Instruction;
-import org.apache.bcel.generic.InstructionFactory;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.Constants;
@@ -40,6 +31,7 @@ public class Patcher {
 	 * Global Vars 
 	 * ************************************************************/
 	private Hashtable<String,String> patchedClasses = new Hashtable<String, String>();
+	private Hashtable<String,Boolean> redefinedMethods = new Hashtable<String,Boolean>();
 	private boolean debug = true;
 	
 	/* ***********************************************************
@@ -54,7 +46,7 @@ public class Patcher {
 	 * @param r Constant pool 
 	 * @return
 	 */
-	private boolean patchMethoref(ConstantMethodref r, JavaClass jc)
+	private boolean patchMethodref(ConstantMethodref r, JavaClass jc)
 	{
 		boolean result = true;
 		
@@ -71,6 +63,10 @@ public class Patcher {
 		System.out.println(ctt.getName(jc.getConstantPool()));
 		// We must not patch it if it's a constructor method 
 		if(ctt.getName(jc.getConstantPool()).equals("<init>"))
+			result = false;
+			
+		// Not patch redefined method
+		if (this.redefinedMethods.get(ctt.getName(jc.getConstantPool())) != null)
 			result = false;
 		
 		return result;
@@ -101,8 +97,32 @@ public class Patcher {
 	 * @param m
 	 * @return
 	 */
-	private boolean patchMethod(Method m){
-		return ( !m.isStatic() & !m.isAbstract() );
+	private boolean patchMethod(JavaClass c, Method m)
+	{		
+		boolean redefined = false;
+		// Get all super classes in ascending order (java.lang.Object is last)
+		JavaClass[] superClasses = c.getSuperClasses();
+		int i=0;
+		
+		// While there is super class and method not redefined
+		while (i<superClasses.length && !redefined)
+		{	
+			Method[] superMethods = superClasses[i].getMethods();
+			int j=0;
+			while (j<superMethods.length && !redefined)
+			{				
+				if (m.getSignature().equals(superMethods[j].getSignature())
+					&& m.getName().equals(superMethods[j].getName()))
+				{					
+					redefined = true;
+					this.redefinedMethods.put(m.getName(),true);
+				}
+				j++;
+			}
+			i++;
+		}
+			
+		return (!redefined && !m.isStatic() && !m.isAbstract() );
 	}
 	
 	
@@ -118,7 +138,6 @@ public class Patcher {
 	 */
 	public void patchClass(String classFile) throws ClassFormatException, IOException
 	{
-	
 		/***************************************
 		 *  Vars
 		 **************************************/
@@ -135,6 +154,9 @@ public class Patcher {
 		
 		// Others
 		int i = 0;
+		
+		// Inits
+		this.redefinedMethods = new Hashtable<String,Boolean>();
 
 		
 		/***************************************
@@ -169,8 +191,22 @@ public class Patcher {
 				return;
 		
 		// Initializing interface vars, name of interface is the name of the class prefixed by 'I'
-		IclassName = "I"+className;
-		IclassFileName = classFileName.replace(className+".class" , "I"+className+".class");
+		/******* TODO *******/
+		// patch correct name for package
+		int index = className.lastIndexOf(".");
+		if(index != -1)
+		{
+			String name = className.substring(index+1);
+			IclassName = className.substring(0, index+1)+"I"+name;
+			IclassFileName = classFileName.replace(name+".class" , "I"+name+".class");
+		}
+		else
+		{
+			IclassName = "I"+className;
+			IclassFileName = classFileName.replace(className+".class" , "I"+className+".class");	
+		}
+		//System.out.println("0000000000000000000 "+IclassName+" "+IclassFileName);
+		/*******************************/
 		
 		// Creating the interface (an interface has always Object as superClass)
 		ClassGen ic = new ClassGen(IclassName, "java/lang/Object",IclassFileName, Constants.ACC_PUBLIC | Constants.ACC_INTERFACE | Constants.ACC_ABSTRACT ,null);
@@ -189,7 +225,7 @@ public class Patcher {
 		for(i=0; i<methods.length; i++)
 		{
 			// Check if we should patch the method or not
-			if(patchMethod(methods[i]))
+			if(patchMethod(javaClass,methods[i]))
 			{
 				// Creating method
 				MethodGen methodGen = new MethodGen(methods[i].getAccessFlags() | Constants.ACC_ABSTRACT, methods[i].getName(),
@@ -240,7 +276,6 @@ public class Patcher {
 		//*********************
 		 // Patching Methodref
 		//*********************
-		// Big pb TODO interfaceindex is not correct 
 		// we need to add interface type of the methodref in the constantpool
 		
 		int interfaceIndex = javaClass.getInterfaceIndices()[newInterfaces.length-1];
@@ -262,7 +297,7 @@ public class Patcher {
 				String mtRefClassName = ((ConstantMethodref)ct).getClass(javaClass.getConstantPool());
 				
 				// Checking if we should replace this constant
-				if(patchMethoref((ConstantMethodref)ct, javaClass))
+				if(patchMethodref((ConstantMethodref)ct, javaClass))
 				{
 					// Add interface to constantpool
 					cpg.addClass("I"+mtRefClassName);
@@ -344,8 +379,7 @@ public class Patcher {
 		javaClass.dump(classFileName);
 		
 		if(debug)System.out.println("Class "+className+" patched successfully !");
-	}
-	
+	}	
 	
 	/**
 	 * Main
@@ -354,10 +388,13 @@ public class Patcher {
 	 * @throws ClassFormatException
 	 * @throws IOException
 	 */
-	public static void main(String args[]) throws ClassNotFoundException, ClassFormatException, IOException
+	public static void main(String args[])
+		throws ClassNotFoundException, ClassFormatException, IOException
 	{
 		CustomLoader loader = new CustomLoader();
 		
-		loader.loadClass("hack/A");
+		loader.loadClass("hack.A");
+
+		Patcher p = new Patcher();
 	}
 }

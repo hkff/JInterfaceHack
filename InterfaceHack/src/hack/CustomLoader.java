@@ -48,6 +48,8 @@ public class CustomLoader extends ClassLoader
 		
 		try
 		{
+			// In : hack.A
+			// Out : hack/A.class
 			String classPath = className.replace('.', '/') + ".class";
 			
 			// Patch the class
@@ -55,8 +57,8 @@ public class CustomLoader extends ClassLoader
 			
 			classByte = loadClassData(classPath);
 			
-			// TODO : pas de .class dans define Class
-			result = defineClass("A", classByte, 0, classByte.length, null);
+			// name : A
+			result = defineClass(className, classByte, 0, classByte.length, null);
 			classes.put(className, result);
 			return result;
 		}
