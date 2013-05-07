@@ -393,8 +393,7 @@ public class Patcher {
 	{
 		CustomLoader loader = new CustomLoader();
 		
-		loader.loadClass("hack.A");
-
-		Patcher p = new Patcher();
+		// Load a class with his package 
+		loader.loadClass("A");
 	}
 }

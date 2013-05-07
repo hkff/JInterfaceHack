@@ -23,6 +23,7 @@ public class CustomLoader extends ClassLoader
 	
 	public Class<?> loadClass(String className) throws ClassNotFoundException 
 	{
+		System.out.println("Chargement de : " + className);
         return findClass(className);
 	}
 
@@ -37,14 +38,6 @@ public class CustomLoader extends ClassLoader
 		{
 			return result;
 		}
-	   
-		// Load from system classes
-		try
-		{
-			//return findSystemClass(className);
-		}
-		catch(Exception e)
-		{}
 		
 		try
 		{
@@ -57,22 +50,32 @@ public class CustomLoader extends ClassLoader
 			
 			classByte = loadClassData(classPath);
 			
-			// name : A
-			result = defineClass(className, classByte, 0, classByte.length, null);
-			classes.put(className, result);
+			// name without package : A
+			String[] tokens = className.split("\\.");
+			String name = tokens[tokens.length-1];
+			result = defineClass(name, classByte, 0, classByte.length, null);
+			classes.put(name, result);
 			return result;
+		}
+		catch(Exception e)
+		{}
+		
+		// Load from system classes if the other load failed
+		try
+		{
+			return findSystemClass(className);
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 			return null;
-		} 
+		}
    }
 
-	private byte[] loadClassData(String className) throws IOException 
+	private byte[] loadClassData(String classPath) throws IOException 
 	{
 		File f;
-		f = new File(className);
+		f = new File(classPath);
 		int size = (int) f.length();
 		byte buff[] = new byte[size];
 		FileInputStream fis = new FileInputStream(f);
