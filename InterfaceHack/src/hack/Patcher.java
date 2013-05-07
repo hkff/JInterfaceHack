@@ -5,6 +5,7 @@ package hack;
  * Created 04/05/2013
  */
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Hashtable;
 
 import org.apache.bcel.classfile.ClassFormatException;
@@ -122,7 +123,7 @@ public class Patcher {
 			i++;
 		}
 			
-		return (!redefined && !m.isStatic() && !m.isAbstract() );
+		return (!redefined && !m.isStatic() && !m.isAbstract() && !m.isPrivate());
 	}
 	
 	
@@ -205,7 +206,7 @@ public class Patcher {
 			IclassName = "I"+className;
 			IclassFileName = classFileName.replace(className+".class" , "I"+className+".class");	
 		}
-		//System.out.println("0000000000000000000 "+IclassName+" "+IclassFileName);
+
 		/*******************************/
 		
 		// Creating the interface (an interface has always Object as superClass)
@@ -228,7 +229,7 @@ public class Patcher {
 			if(patchMethod(javaClass,methods[i]))
 			{
 				// Creating method
-				MethodGen methodGen = new MethodGen(methods[i].getAccessFlags() | Constants.ACC_ABSTRACT, methods[i].getName(),
+				MethodGen methodGen = new MethodGen(/*methods[i].getAccessFlags() */Constants.ACC_PUBLIC | Constants.ACC_ABSTRACT, methods[i].getName(),
 						methods[i].getSignature(), javaClass.getClassName(),new InstructionList(),icp);
 				
 				/* -------------------------- */
@@ -387,13 +388,22 @@ public class Patcher {
 	 * @throws ClassNotFoundException
 	 * @throws ClassFormatException
 	 * @throws IOException
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 * @throws InterruptedException 
 	 */
 	public static void main(String args[])
-		throws ClassNotFoundException, ClassFormatException, IOException
+		throws ClassNotFoundException, ClassFormatException, IOException, InstantiationException, IllegalAccessException, InterruptedException
 	{
 		CustomLoader loader = new CustomLoader();
 		
-		// Load a class with his package 
-		loader.loadClass("A");
+		// using Runnable
+		System.out.println(args[0]);
+		Launcher rnClass = new Launcher();
+		
+		String[] args2 = Arrays.copyOfRange(args, 1, args.length); 
+		
+		rnClass.run(args[0],loader,args2);
+
 	}
 }
