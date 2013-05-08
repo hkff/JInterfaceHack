@@ -272,6 +272,11 @@ protected ConstantPool constant_pool;
   public final byte  getTag()       { return tag; }    
 
   /**
+   * Hacked
+   * @return
+   */
+  public final void  setTag(byte tag)       { this.tag=tag; }  
+  /**
    * @return Constant pool used by this object.
    * @see ConstantPool
    */   

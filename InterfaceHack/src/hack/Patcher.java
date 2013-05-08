@@ -16,6 +16,7 @@ import org.apache.bcel.classfile.ConstantInterfaceMethodref;
 import org.apache.bcel.classfile.ConstantNameAndType;
 import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.LineNumberTable;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.generic.BranchInstruction;
 import org.apache.bcel.generic.ClassGen;
@@ -255,10 +256,10 @@ public class Patcher {
 				
 				// Adding method to interface
 				ic.addMethod(methodGen.getMethod());
-				if(debug)System.out.println("YES");
+				if(debug)System.out.println(" YES");
 			}
 			else
-				if(debug)System.out.println("NO");
+				if(debug)System.out.println(" NO");
 		}
 		
 		// Update interface constant pool
@@ -301,8 +302,8 @@ public class Patcher {
 		for(i=0; i<ln; i++)
 		{
 			Constant ct = javaClass.getConstantPool().getConstant(i);
-			//System.out.println(ct);
-			/************************ TODO : invokeinterface add two bytes , we must correct references **************/
+
+			/************************ TODO : invokeinterface add two bytes , we must correct references in stack table **************/
 			// If constant is a methodref
 			if(ct != null && ct.toString().startsWith("CONSTANT_Methodref"))
 			{	
@@ -322,7 +323,6 @@ public class Patcher {
 					javaClass.setConstantPool(cpg.getFinalConstantPool());
 					
 					interfaceIndex = cpg.getFinalConstantPool().getLength()-1;
-					System.out.println(interfaceIndex + " "+cpg.getFinalConstantPool().getConstant(interfaceIndex)+" ");
 					
 					// Creating the InterfaceMethodref constant
 					Constant Icons = new ConstantInterfaceMethodref(interfaceIndex,((ConstantMethodref) ct).getNameAndTypeIndex());
@@ -335,15 +335,12 @@ public class Patcher {
 			}
 		}
 		javaClass.setConstantPool(cpg.getFinalConstantPool());
-		System.out.println("++ "+javaClass.getConstantPool());
 		
 		//*********************************************************************
 		// Patching call sites (Replacing invokevirtual by invokeinterface)
 		// Searching in code of all methods
 		//*********************************************************************
 		
-		//for(int op=0; op<javaClass.getConstantPool().getLength(); op++)
-			//System.out.println("++ "+javaClass.getConstantPool());
 		int k,l;
 		for(i=0; i<methods.length; i++)
 		{
@@ -359,7 +356,6 @@ public class Patcher {
 			
 			InstructionHandle[] insh =  mth.getInstructionList().getInstructionHandles();
 			
-			//System.out.println("------------ "+ins.length+" "+mth.getInstructionList().size());
 			
 			InstructionList ins2 = mth.getInstructionList(); 
 			// The new patched method's instructions List
@@ -375,8 +371,6 @@ public class Patcher {
 					// Spliting instruction to get class index and arguments number of the invokevirtual
 					String[] insPart = ins[k].toString().split(" ");
 				
-					System.out.println("sss "+ins[k]+" "+patchInvokevirtual(Integer.parseInt(insPart[1]), javaClass.getConstantPool()));
-					
 					// Check if we should patch the invokevirtual
 					if(patchInvokevirtual(Integer.parseInt(insPart[1]), javaClass.getConstantPool()))
 					{
@@ -413,17 +407,19 @@ public class Patcher {
 							"index "+((BranchInstruction) ins[k]).getIndex()+
 							"index "+((BranchInstruction) ins[k]).getTarget());
 				}*/
-				
 			}
-			System.out.println("\t Nbr instructions : "+l);
+			if(debug)System.out.println("\t Nbr instructions : "+l);
 			
 			// Patch the method instructionsList
 			mth.setInstructionList(il);
+			mth.setMaxLocals();
 			mth.setMaxStack();
+			mth.update();
 			
-			// Generate the new method without changing constantpool
+			// Generate the new method without changing constantpool			
 			methods[i] = mth.getMethodNoChangeCTP(methods[i].getNameIndex(), methods[i].getSignatureIndex(),
 					methods[i].getAttributes()[0].getNameIndex());
+			
 		}
 		
 		

@@ -56,6 +56,9 @@ package org.apache.bcel.generic;
 
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.*;
+
+import sun.org.mozilla.javascript.optimizer.Codegen;
+
 import java.util.*;
 
 /**
@@ -885,10 +888,15 @@ public class MethodGen extends FieldGenOrMethodGen {
 		 */
 		/*if ((variable_vec.size() > 0) && !strip_attributes)
 			addCodeAttribute(lvt = getLocalVariableTable(cp));
-
+		 */
+		
+		// Putting StackMapTable after lineTable /* Adhoc */
 		if ((line_number_vec.size() > 0) && !strip_attributes)
-			addCodeAttribute(lnt = getLineNumberTable(cp));*/
-
+		{
+			//code_attrs_vec.add(code_attrs_vec.size()-1, lnt = getLineNumberTable(cp));
+			addCodeAttribute(lnt = getLineNumberTable(cp));
+		}
+		
 		Attribute[] code_attrs = getCodeAttributes();
 
 		/*
@@ -924,6 +932,8 @@ public class MethodGen extends FieldGenOrMethodGen {
 			addAttribute(code);
 		}
 
+		System.out.println("--------*****++++ "+ cp.getConstant(code.getAttributes()[0].getNameIndex()));
+		
 		ExceptionTable et = null;
 
 		if (throws_vec.size() > 0)
@@ -933,7 +943,43 @@ public class MethodGen extends FieldGenOrMethodGen {
 
 		Method m = new Method(access_flags, name_index, signature_index,
 				getAttributes(), cp.getConstantPool());
-
+/**************************/
+		int codeAttrNbr = m.getCode().getAttributes().length;
+		Attribute[] attr = m.getCode().getAttributes();
+		
+		for(int i=0; i<codeAttrNbr; i++)
+		{
+			System.out.println("kikiki "+attr[i].toString()+" "+attr[i].getTag()+" "+attr[i].getNameIndex()+" "+attr[i].getClass());
+			if(cp.getConstantPool().getConstant(attr[i].getNameIndex()).toString().equals("CONSTANT_Utf8[1](\"StackMapTable\")"))
+			{
+				System.out.println(cp.getConstantPool().getConstant(attr[i].getNameIndex()).toString());
+				System.out.println(attr[i].getConstantPool().getConstant(attr[i].getNameIndex()).toString());
+				
+				cp.getConstantPool().setConstant(attr[i].getNameIndex(),new ConstantUtf8("StackMap"));
+				attr[i].setConstantPool(cp.getFinalConstantPool());
+				
+				System.out.println(cp.getConstantPool().getConstant(attr[i].getNameIndex()).toString());
+				System.out.println(attr[i].getConstantPool().getConstant(attr[i].getNameIndex()).toString());
+				
+				System.out.println(cp.getFinalConstantPool());
+				
+				
+				attr[i].setTag((byte) 11);
+				
+				code.setConstantPool(cp.getFinalConstantPool());
+					
+				System.out.println("eeeeee "+attr[i].toString()+" "+attr[i].getTag()+" "+attr[i].getClass()  );
+				try {
+					StackMap stk = (StackMap) attr[i];
+					System.out.println("zzzzzzzzz"+stk.getMapLength());	
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				
+			}
+		}
+			//StackMap stk = 
+		/*************************/
 		// Undo effects of adding attributes
 		if (lvt != null)
 			removeCodeAttribute(lvt);
