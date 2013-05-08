@@ -386,14 +386,19 @@ public class Patcher {
 						ins[k] = new INVOKEINTERFACE(Integer.parseInt(insPart[1]),methods[i].getArgumentTypes().length + 1);
 						if(debug)System.out.println("Stack : "+ins[k].produceStack(cpgm));
 						
-						
+						il.append(ins[k]);
 					}
+					else
+						il.append(insh[k]);
+					
 				}
+				else
+					il.append(insh[k]);
+				
 				// Add instruction to the new instruction List
 				l++;
 				
-				// Pb with brache instructions
-				try {
+				/*try {
 						if(ins[k] instanceof BranchInstruction)
 							il.append(insh[k]);
 						else
@@ -407,7 +412,7 @@ public class Patcher {
 					System.out.println("index "+((BranchInstruction) ins[k]).getIndex()+
 							"index "+((BranchInstruction) ins[k]).getIndex()+
 							"index "+((BranchInstruction) ins[k]).getTarget());
-				}
+				}*/
 				
 			}
 			System.out.println("\t Nbr instructions : "+l);
