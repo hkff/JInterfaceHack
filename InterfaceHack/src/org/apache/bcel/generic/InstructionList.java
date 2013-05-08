@@ -342,8 +342,8 @@ private int[]             byte_positions; // byte code offsets corresponding to 
    *
    * @param ih instruction to append
    */
-  private void append(InstructionHandle ih) {
-	 // System.out.println("InstructionList.java -> append(ih) : " + ih);/****************** debug */
+  public void append(InstructionHandle ih) {
+	//  System.out.println("InstructionList.java -> append(ih) : " + ih);/****************** debug */
     if(isEmpty()) {
       start = end = ih;
       ih.next = ih.prev = null;
@@ -361,11 +361,33 @@ private int[]             byte_positions; // byte code offsets corresponding to 
   /**
    * Append an instruction to the end of this list.
    *
+   * @param ih instruction to append
+   */
+  // Patched
+  public void append2(InstructionHandle ih) {
+	 // System.out.println("InstructionList.java -> append(ih) : " + ih);/****************** debug */
+    if(isEmpty()) {
+      start = end = ih;
+      ih.next = ih.prev = null;
+    }
+    else {
+      end.next = ih;
+      ih.prev  = end;
+      ih.next  = null;
+      end      = ih;
+    }
+    
+    length++; // Update length
+  }
+  
+  /**
+   * Append an instruction to the end of this list.
+   *
    * @param i instruction to append
    * @return instruction handle of the appended instruction
    */
   public InstructionHandle append(Instruction i) {
-	 // System.out.println("InstructionList.java -> append(i) : " + i.toString(true));/****************** debug */
+	 // System.out.println("\n\nInstructionList.java -> append(i) : " + i.toString(true));/****************** debug */
     InstructionHandle ih = InstructionHandle.getInstructionHandle(i);
     append(ih);
 
