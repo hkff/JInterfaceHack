@@ -932,7 +932,6 @@ public class MethodGen extends FieldGenOrMethodGen {
 			addAttribute(code);
 		}
 
-		System.out.println("--------*****++++ "+ cp.getConstant(code.getAttributes()[0].getNameIndex()));
 		
 		ExceptionTable et = null;
 
@@ -947,6 +946,7 @@ public class MethodGen extends FieldGenOrMethodGen {
 		int codeAttrNbr = m.getCode().getAttributes().length;
 		Attribute[] attr = m.getCode().getAttributes();
 		
+		/*
 		for(int i=0; i<codeAttrNbr; i++)
 		{
 			System.out.println("kikiki "+attr[i].toString()+" "+attr[i].getTag()+" "+attr[i].getNameIndex()+" "+attr[i].getClass());
@@ -978,7 +978,7 @@ public class MethodGen extends FieldGenOrMethodGen {
 				
 			}
 		}
-			//StackMap stk = 
+		*/ 
 		/*************************/
 		// Undo effects of adding attributes
 		if (lvt != null)

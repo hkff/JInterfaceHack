@@ -3,6 +3,7 @@ public class Main {
 static int var0;
  public static void main(String[] args) { 
 
+  System.out.println("Msg from main !");
   classe0 var0 = new classe0();
   classe1 var1 = new classe1();
   classe2 var2 = new classe2();
@@ -12,12 +13,13 @@ static int var0;
   var1.foo();  
   int i; 
   for (i = 0; i < 100000000; i++){
-    var0.foo();
+   var0.foo(0);
    var1.foo();
    var2.foo();
    var3.foo();
    var4.foo();
   
   }
+  System.out.println("Main runed !");
  }
 }

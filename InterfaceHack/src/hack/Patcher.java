@@ -23,6 +23,7 @@ import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.GotoInstruction;
 import org.apache.bcel.generic.INVOKEINTERFACE;
+import org.apache.bcel.generic.INVOKEVIRTUAL;
 import org.apache.bcel.generic.Instruction;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
@@ -37,7 +38,7 @@ public class Patcher {
 	 * ************************************************************/
 	private Hashtable<String,String> patchedClasses = new Hashtable<String, String>();
 	private Hashtable<String,Boolean> redefinedMethods = new Hashtable<String,Boolean>();
-	private boolean debug = true;
+	private int debug = 3;
 	
 	/* ***********************************************************
 	 * Utils methods
@@ -64,25 +65,25 @@ public class Patcher {
 		// Check if the class of the method is patched, if okey then we can patch the methodref
 		if(this.patchedClasses.get(className) == null)
 		{
-			if(debug)System.out.println("\t"+r.toString()+" the target class was not patched ! ");
+			if(debug>=1)System.out.println("\t"+r.toString()+" the target class was not patched ! ");
 			return false;
 		}
 			
 		// We must not patch it if it's a constructor method 
 		if(ctt.getName(jc.getConstantPool()).equals("<init>"))
 		{
-			if(debug)System.out.println("\t"+r.toString()+" Constructor method !");
+			if(debug>=1)System.out.println("\t"+r.toString()+" Constructor method !");
 			return false;
 		}
 		
 		// Not patch redefined method
 		if (this.redefinedMethods.get(ctt.getName(jc.getConstantPool())) != null)
 		{
-			if(debug)System.out.println("\t"+ctt.getName(jc.getConstantPool())+" Method overriding ! ");
+			if(debug>=1)System.out.println("\t"+ctt.getName(jc.getConstantPool())+" Method overriding ! ");
 			return false;
 		}
 		
-		if(debug && result)System.out.println("\t"+ctt.getName(jc.getConstantPool())+" in class "+className+" patched ! ");
+		if(debug>=1 && result)System.out.println("\t"+ctt.getName(jc.getConstantPool())+" in class "+className+" patched ! ");
 		return result;
 	}
 	
@@ -174,12 +175,12 @@ public class Patcher {
 		// Inits
 		this.redefinedMethods = new Hashtable<String,Boolean>();
 
-		if(debug)System.out.println("\n################################## Handeling class : "+classFile);
+		if(debug>=1)System.out.println("\n################################## Handeling class : "+classFile);
 		
 		/***************************************
 		 *  STEP 1 : Loading class file
 		 **************************************/
-		if(debug)System.out.print("---------- STEP 1 : Loading class file : "+classFile+" -> ");
+		if(debug>=1)System.out.println("---------- STEP 1 : Loading class file : "+classFile+" -> ");
 		
 		JavaClass javaClass = new ClassParser(classFile).parse();
 		// update vars
@@ -194,12 +195,12 @@ public class Patcher {
 		// Registering class in Patcher patchedClasses
 		this.patchedClasses.put(className, classFileName);
 		
-		if(debug)System.out.println(" OK"+className+" loaded");
+		if(debug>=1)System.out.println(" OK"+className+" loaded");
 		
 		/***************************************
 		 *  STEP 2 : Generate the interface
 		 **************************************/
-		if(debug)System.out.println("---------- STEP 2 : Generating interface : I"+className);
+		if(debug>=1)System.out.println("---------- STEP 2 : Generating interface : I"+className);
 		
 		// Check if this class 
 		String[] classInterfaces = javaClass.getInterfaceNames();
@@ -238,7 +239,7 @@ public class Patcher {
 		
 		for(i=0; i<methods.length; i++)
 		{
-			if(debug)System.out.print("Method [ "+methods[i].getName()+"] patched : ");
+			if(debug>=2)System.out.print("Method [ "+methods[i].getName()+"] patched : ");
 			
 			// Check if we should patch the method or not
 			if(patchMethod(javaClass,methods[i]))
@@ -256,10 +257,10 @@ public class Patcher {
 				
 				// Adding method to interface
 				ic.addMethod(methodGen.getMethod());
-				if(debug)System.out.println(" YES");
+				if(debug>=2)System.out.println(" YES");
 			}
 			else
-				if(debug)System.out.println(" NO");
+				if(debug>=2)System.out.println(" NO");
 		}
 		
 		// Update interface constant pool
@@ -275,7 +276,7 @@ public class Patcher {
 		//***************************
 		// Adding interface to class
 		//***************************
-		if(debug)System.out.println("---------- STEP 3 : Patching class file : "+className);
+		if(debug>=1)System.out.println("---------- STEP 3 : Patching class file : "+className);
 		
 		ConstantPool constants = javaClass.getConstantPool();
 		ConstantPoolGen cpg = new ConstantPoolGen(constants);
@@ -330,7 +331,7 @@ public class Patcher {
 					// replacing the constant Methodref wth InterfaceMethodref
 					cpg.setConstant(i, Icons);
 					
-					if(debug)System.out.println("\t"+javaClass.getConstantPool().getConstant(i).toString());
+					if(debug>=3)System.out.println("\t"+javaClass.getConstantPool().getConstant(i).toString());
 				}
 			}
 		}
@@ -344,7 +345,7 @@ public class Patcher {
 		int k,l;
 		for(i=0; i<methods.length; i++)
 		{
-			if(debug)System.out.println("*** Patching invokevirtual in method [ "+methods[i].getName()+" ]");
+			if(debug>=2)System.out.println("*** Patching invokevirtual in method [ "+methods[i].getName()+" ]");
 					
 			l=0;
 			// Getting constantpool and method generator (we create a method generator based on our method and use it to get instructions)
@@ -374,11 +375,12 @@ public class Patcher {
 					// Check if we should patch the invokevirtual
 					if(patchInvokevirtual(Integer.parseInt(insPart[1]), javaClass.getConstantPool()))
 					{
-						if(debug)System.out.println("Instruction [ "+ins[k]+" ] Patched !");
+						if(debug>=3)System.out.println("Instruction [ "+ins[k]+" ] Patched !");
 						
+						INVOKEVIRTUAL lg = (INVOKEVIRTUAL)ins[k];
 						// Patch the invoke : INVOKEINTERFACE( class Index, the number of arguments for stack (+1 for this))
-						ins[k] = new INVOKEINTERFACE(Integer.parseInt(insPart[1]),methods[i].getArgumentTypes().length + 1);
-						if(debug)System.out.println("Stack : "+ins[k].produceStack(cpgm));
+						ins[k] = new INVOKEINTERFACE(Integer.parseInt(insPart[1]),lg.getArgumentTypes(cpgm).length + 1);
+						if(debug>=3)System.out.println("Stack : "+ins[k].produceStack(cpgm));
 						
 						il.append(ins[k]);
 					}
@@ -391,24 +393,8 @@ public class Patcher {
 				
 				// Add instruction to the new instruction List
 				l++;
-				
-				/*try {
-						if(ins[k] instanceof BranchInstruction)
-							il.append(insh[k]);
-						else
-							il.append(ins[k]);	
-				} catch (Exception e) {
-					
-					// Debug
-					System.out.println(e);
-					System.out.println("DEBUG : ERROR while appending instruction : "+ins[k]);
-					
-					System.out.println("index "+((BranchInstruction) ins[k]).getIndex()+
-							"index "+((BranchInstruction) ins[k]).getIndex()+
-							"index "+((BranchInstruction) ins[k]).getTarget());
-				}*/
 			}
-			if(debug)System.out.println("\t Nbr instructions : "+l);
+			if(debug>=3)System.out.println("\t Nbr instructions : "+l);
 			
 			// Patch the method instructionsList
 			mth.setInstructionList(il);
@@ -429,7 +415,7 @@ public class Patcher {
 		// Dumping Class File
 		javaClass.dump(classFileName);
 		
-		if(debug)System.out.println("Class "+className+" patched successfully !");
+		if(debug>=1)System.out.println("Class "+className+" patched successfully !");
 	}	
 	
 	/**
@@ -447,23 +433,15 @@ public class Patcher {
 	{
 		
 		Patcher p = new Patcher();
-		int nbr = Integer.parseInt(args[0]);
-		for(int i=0; i<nbr; i++)
-			p.patchClass("classe"+i+".class");
 		
-		p.patchClass("Main.class");
-		
-		return ;
-		/*
 		CustomLoader loader = new CustomLoader();
 		
 		// using Runnable
-		System.out.println(args[0]);
-		
 		Launcher rnClass = new Launcher();
-		String[] args2 = Arrays.copyOfRange(args, 1, args.length); 
+		String[] args2 = Arrays.copyOfRange(args, 1, args.length);
+		
 		rnClass.run(args[0],loader,args2);
-		*/
+		
 
 	}
 }

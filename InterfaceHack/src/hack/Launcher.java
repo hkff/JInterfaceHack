@@ -11,15 +11,12 @@ public class Launcher implements Runnable {
 	@Override
 	public void run() {
 		try {
-			System.out.println("000000000000000 "+mainArgs[0]+" "+mainArgs.getClass()+" "+String[].class);
 			
 			Method m1 = runClass.getDeclaredMethod("main",String[].class);
-			
-			System.out.println("---------"+m1.getName()+runClass.newInstance().toString());
 			m1.invoke(null, (Object)mainArgs);
 			
 		} catch (NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException |
-				IllegalAccessException | InstantiationException e) {
+				IllegalAccessException e){//| InstantiationException e) {
 			e.printStackTrace();
 		}
 	}
